@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+hr,
+.border,
+.border-r,
+.border-l,
+.border-t,
+.border-b,
+.border-x,
+.border-y {
+  @apply border-[#eaeaea] dark:border-[#333]
+}
+
+details > summary.list-none::-webkit-details-marker,
+details > summary.list-none::marker {
+  display: none;
+}
