@@ -68,15 +68,12 @@
   --hljs-markup-inserted-deleted-text: #aff5b4;
 }
 
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 16px;
+pre code {
+  display: block !important;
+  overflow-x: auto !important;
+  padding: 16px !important;
   border-radius: 0px !important;
-}
-
-.hljs {
-  color: var(--hljs-text);
+  color: var(--hljs-text) !important;
   background: var(--hljs-bg) !important;
 }
 
