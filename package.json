@@ -1,8 +1,8 @@
 {
-  "name": "bloginhub",
-  "version": "0.0.1",
+  "name": "ginb",
+  "version": "0.0.0",
   "description": "Write & Share all in GitHub",
-  "main": "./src/main.js",
+  "main": "./readme.md",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -12,20 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chralpha/Bloginhub.git"
+    "url": "git+https://github.com/chralpha/ginb.git"
   },
   "keywords": [
     "GitHub",
     "Issue",
-    "Blog",
-    "Hexo"
+    "Blog"
   ],
   "author": "ChrAlpha",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chralpha/Bloginhub/issues"
+    "url": "https://github.com/chralpha/ginb/issues"
   },
-  "homepage": "https://github.com/chralpha/Bloginhub#readme",
+  "homepage": "https://github.com/chralpha/ginb#readme",
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/forms": "^0.5.7",
