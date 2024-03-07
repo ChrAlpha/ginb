@@ -15,7 +15,8 @@ export default async function TagPage({ params }) {
   }
 
   return (
-    <div className="md:flex-1">
+    <>
+      {" "}
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">{decodeURIComponent(tag)}</h1>
         <span className="text-black/60 dark:text-white/60">
@@ -23,6 +24,6 @@ export default async function TagPage({ params }) {
         </span>
       </div>
       <ArchivesList posts={postSpecTag} />
-    </div>
+    </>
   );
 }

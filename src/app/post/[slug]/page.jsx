@@ -12,18 +12,16 @@ export default async function PostPage({ params }) {
   }
 
   return (
-    <div className="md:flex-1">
-      <PostContent
-        title={post.title}
-        created_at={post.created_at}
-        updated_at={post.updated_at}
-        contentRaw={post.contentRaw}
-        tags={post.tags}
-        slug={post.slug}
-        path={post.path}
-        comments={post.comments}
-        html_url={post.html_url}
-      />
-    </div>
+    <PostContent
+      title={post.title}
+      created_at={post.created_at}
+      updated_at={post.updated_at}
+      contentRaw={post.contentRaw}
+      tags={post.tags}
+      slug={post.slug}
+      path={post.path}
+      comments={post.comments}
+      html_url={post.html_url}
+    />
   );
 }

@@ -5,7 +5,7 @@ export default async function Archives() {
   const posts = await blogInit();
 
   return (
-    <div className="md:flex-1">
+    <>
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">归档</h1>
         <span className="text-black/60 dark:text-white/60">
@@ -13,6 +13,6 @@ export default async function Archives() {
         </span>
       </div>
       <ArchivesList posts={posts} />
-    </div>
+    </>
   );
 }

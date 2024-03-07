@@ -16,7 +16,7 @@ export default async function Tags() {
   });
 
   return (
-    <div className="md:flex-1">
+    <>
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">标签</h1>
       </div>
@@ -35,6 +35,6 @@ export default async function Tags() {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }

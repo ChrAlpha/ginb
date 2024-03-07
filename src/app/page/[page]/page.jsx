@@ -19,9 +19,5 @@ export default async function Page({ params }) {
     }
     return 0;
   });
-  return (
-    <div className="md:flex-1">
-      <PostList base={"/"} current={parseInt(params.page)} posts={posts} />
-    </div>
-  );
+  return <PostList base={"/"} current={parseInt(params.page)} posts={posts} />;
 }
