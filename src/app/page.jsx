@@ -4,8 +4,8 @@ import { sitename } from "/_config";
 
 export const metadata = {
   title: "首页 ｜ " + sitename,
-  alternates: {
-    canonical: "/",
+  openGraph: {
+    title: "首页 ｜ " + sitename,
   },
 };
 

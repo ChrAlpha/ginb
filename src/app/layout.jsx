@@ -3,8 +3,61 @@ import Footer from "./footer";
 import Left from "/src/components/Left";
 import { ThemeProviders } from "../components/ToggleTheme";
 import "./globals.css";
+import {
+  sitename,
+  username,
+  description,
+  keywords,
+  url,
+  favicon,
+} from "/_config";
 
 export const runtime = "edge";
+
+export const metadata = {
+  metadataBase: new URL(url),
+  title: sitename,
+  description: description,
+  keywords: keywords,
+  author: username,
+  openGraph: {
+    title: sitename,
+    siteName: sitename,
+    description: description,
+    images: [
+      {
+        url: favicon,
+      },
+    ],
+    type: "website",
+  },
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "16x16",
+        type: "image/ico",
+      },
+    ],
+    shortcut: [
+      {
+        url: "/favicon.ico",
+        type: "image/ico",
+      },
+    ],
+  },
+  appleWebApp: {
+    title: sitename,
+    statusBarStyle: "black-translucent",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: false,
+};
 
 export default function RootLayout({ children }) {
   return (

@@ -2,12 +2,53 @@ import { ArchivesList } from "/src/components/ArchivesList";
 import { blogInit } from "/src/utils/blogInit";
 import { notFound } from "next/navigation";
 import { slug } from "github-slugger";
+import { sitename, keywords } from "/_config";
 
-export default async function TagPage({ params }) {
+export const generateMetadata = async ({ params: { tag } }) => {
   const posts = await blogInit();
-  const { tag } = params;
+  let tagName = "";
   const postSpecTag = posts.filter((post) =>
-    post.tags.map((t) => slug(t)).includes(decodeURIComponent(tag))
+    post.tags.some((t) => {
+      if (slug(t) === tag) {
+        tagName = t;
+        return true;
+      }
+      return false;
+    })
+  );
+  if (!postSpecTag) {
+    return {
+      title: `404 Not Found ｜ ${sitename}`,
+      openGraph: {
+        title: `404 Not Found ｜ ${sitename}`,
+      },
+      robots: {
+        index: false,
+      },
+    };
+  }
+  return {
+    title: `标签：${tagName} ｜ ${sitename}`,
+    description: `${sitename} 下标签为 ${tagName} 的所有文章。`,
+    keywords: [tagName].concat(keywords),
+    openGraph: {
+      title: `标签：${tagName} ｜ ${sitename}`,
+      description: `${sitename} 下标签为 ${tagName} 的所有文章。`,
+    },
+  };
+};
+
+export default async function TagPage({ params: { tag } }) {
+  const posts = await blogInit();
+  let tagName = "";
+  const postSpecTag = posts.filter((post) =>
+    post.tags.some((t) => {
+      if (slug(t) === tag) {
+        tagName = t;
+        return true;
+      }
+      return false;
+    })
   );
   if (!postSpecTag) {
     // 404 Not Found
@@ -18,7 +59,7 @@ export default async function TagPage({ params }) {
     <>
       {" "}
       <div className="w-full p-4">
-        <h1 className="text-3xl font-semibold">{decodeURIComponent(tag)}</h1>
+        <h1 className="text-3xl font-semibold">{tagName}</h1>
         <span className="text-black/60 dark:text-white/60">
           共 {postSpecTag.length} 篇文章
         </span>

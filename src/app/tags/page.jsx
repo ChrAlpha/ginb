@@ -1,6 +1,16 @@
 import Link from "next/link";
 import { blogInit } from "/src/utils/blogInit";
 import { slug } from "github-slugger";
+import { sitename } from "/_config";
+
+export const metadata = {
+  title: `标签 ｜ ${sitename}`,
+  description: `${sitename} 的所有标签。`,
+  openGraph: {
+    title: `标签 ｜ ${sitename}`,
+    description: `${sitename} 的所有标签。`,
+  },
+};
 
 export default async function Tags() {
   const posts = await blogInit();
