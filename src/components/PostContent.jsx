@@ -2,10 +2,13 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 import Link from "next/link";
 import { slug as slugger } from "github-slugger";
 import { memo } from "react";
 import "/public/github.css";
+import "katex/dist/katex.min.css";
 
 const formatDate = (date) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -37,8 +40,8 @@ const PostContent = async ({
         <div className="max-w-none mt-4 prose dark:prose-invert prose-pre:bg-transparent prose-pre:rounded-none prose-pre:-mx-4 prose-pre:p-0 prose-pre:overflow-x-auto prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-black/60 dark:prose-blockquote:text-white/60 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:font-normal prose-code:bg-gray-300/30 prose-code:py-0.5 prose-code:px-1 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
           <Markdown
             children={contentRaw}
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
           />
         </div>
       </div>
