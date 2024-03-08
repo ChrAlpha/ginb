@@ -1,6 +1,7 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import rehypeRaw from "rehype-raw";
 import Link from "next/link";
 import { slug as slugger } from "github-slugger";
 import { memo } from "react";
@@ -37,7 +38,7 @@ const PostContent = async ({
           <Markdown
             children={contentRaw}
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
+            rehypePlugins={[rehypeHighlight, rehypeRaw]}
           />
         </div>
       </div>
