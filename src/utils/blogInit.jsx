@@ -26,6 +26,7 @@ export const blogInit = cache(async () => {
   const issues = await octokit.paginate(octokit.rest.issues.listForRepo, {
     owner: username,
     repo: repository,
+    creator: username,
     per_page: 100,
   });
 
