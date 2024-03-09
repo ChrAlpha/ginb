@@ -15,7 +15,7 @@ const formatDate = (date) => {
 export const PostCard = memo(
   async ({ title, created_at, summary, path, tags, html_url, comments }) => {
     return (
-      <div className="flex flex-col w-full h-full border rounded-lg p-4 gap-4">
+      <div className="flex h-full w-full flex-col gap-4 rounded-lg border p-4">
         <h2 className="text-2xl">
           <Link href={"/" + path}>{title}</Link>
         </h2>
@@ -36,13 +36,13 @@ export const PostCard = memo(
                 </>
               ))}
           </div>
-          <div className="text-sm text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white">
+          <div className="text-sm text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white">
             <Link className="flex flex-row" href={html_url} target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="w-4 h-4 my-auto"
+                className="my-auto h-4 w-4"
               >
                 <path
                   fillRule="evenodd"
@@ -56,86 +56,81 @@ export const PostCard = memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
-export const PageNav = memo(
-  async ({ current, prev, prev_link, next, next_link, total }) => {
-    let prevProps = {};
-    let nextProps = {};
-    if (prev && prev != 0) {
-      prevProps.name = Link;
-      prevProps.className =
-        "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
-      prevProps.href = prev_link;
-    } else {
-      prevProps.name = "div";
-      prevProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
-    }
-    if (next && next != 0) {
-      nextProps.name = Link;
-      nextProps.className =
-        "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
-      nextProps.href = next_link;
-    } else {
-      nextProps.name = "div";
-      nextProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
-    }
-    return (
-      <>
-        <div className="flex flex-row justify-between mt-4">
-          <prevProps.name {...prevProps}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.793 2.232a.75.75 0 0 1-.025 1.06L3.622 7.25h10.003a5.375 5.375 0 0 1 0 10.75H10.75a.75.75 0 0 1 0-1.5h2.875a3.875 3.875 0 0 0 0-7.75H3.622l4.146 3.957a.75.75 0 0 1-1.036 1.085l-5.5-5.25a.75.75 0 0 1 0-1.085l5.5-5.25a.75.75 0 0 1 1.06.025Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>Prev</span>
-          </prevProps.name>
-          <span className="p-2">
-            {current} / {total}
-          </span>
-          <nextProps.name {...nextProps}>
-            <span>Next</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.207 2.232a.75.75 0 0 0 .025 1.06l4.146 3.958H6.375a5.375 5.375 0 0 0 0 10.75H9.25a.75.75 0 0 0 0-1.5H6.375a3.875 3.875 0 0 1 0-7.75h10.003l-4.146 3.957a.75.75 0 0 0 1.036 1.085l5.5-5.25a.75.75 0 0 0 0-1.085l-5.5-5.25a.75.75 0 0 0-1.06.025Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </nextProps.name>
-        </div>
-      </>
-    );
+export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, total }) => {
+  let prevProps = {};
+  let nextProps = {};
+  if (prev && prev != 0) {
+    prevProps.name = Link;
+    prevProps.className =
+      "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
+    prevProps.href = prev_link;
+  } else {
+    prevProps.name = "div";
+    prevProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
   }
-);
+  if (next && next != 0) {
+    nextProps.name = Link;
+    nextProps.className =
+      "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
+    nextProps.href = next_link;
+  } else {
+    nextProps.name = "div";
+    nextProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
+  }
+  return (
+    <>
+      <div className="mt-4 flex flex-row justify-between">
+        <prevProps.name {...prevProps}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.793 2.232a.75.75 0 0 1-.025 1.06L3.622 7.25h10.003a5.375 5.375 0 0 1 0 10.75H10.75a.75.75 0 0 1 0-1.5h2.875a3.875 3.875 0 0 0 0-7.75H3.622l4.146 3.957a.75.75 0 0 1-1.036 1.085l-5.5-5.25a.75.75 0 0 1 0-1.085l5.5-5.25a.75.75 0 0 1 1.06.025Z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span>Prev</span>
+        </prevProps.name>
+        <span className="p-2">
+          {current} / {total}
+        </span>
+        <nextProps.name {...nextProps}>
+          <span>Next</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12.207 2.232a.75.75 0 0 0 .025 1.06l4.146 3.958H6.375a5.375 5.375 0 0 0 0 10.75H9.25a.75.75 0 0 0 0-1.5H6.375a3.875 3.875 0 0 1 0-7.75h10.003l-4.146 3.957a.75.75 0 0 0 1.036 1.085l5.5-5.25a.75.75 0 0 0 0-1.085l-5.5-5.25a.75.75 0 0 0-1.06.025Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </nextProps.name>
+      </div>
+    </>
+  );
+});
 
 const PostList = async ({ base, current = 1, posts }) => {
   const pageNumber = current;
-  const currentPosts = posts.slice(
-    post_per_page * (pageNumber - 1),
-    post_per_page * pageNumber
-  );
+  const currentPosts = posts.slice(post_per_page * (pageNumber - 1), post_per_page * pageNumber);
   const pagination = {
     currentPage: pageNumber,
     totalPages: Math.max(Math.ceil(posts.length / post_per_page), 1),
   };
   return (
     <>
-      <ul className="grid grid-cols-1 lg:grid-cols-2 auto-rows-min gap-4">
+      <ul className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-2">
         {currentPosts.map((post) => (
           <li key={post.slug}>
             <PostCard
@@ -154,9 +149,7 @@ const PostList = async ({ base, current = 1, posts }) => {
         current={pagination.currentPage}
         prev={pagination.currentPage - 1}
         prev_link={
-          pagination.currentPage - 1 > 1
-            ? `${base}page/${pagination.currentPage - 1}`
-            : base
+          pagination.currentPage - 1 > 1 ? `${base}page/${pagination.currentPage - 1}` : base
         }
         next={pagination.currentPage + 1}
         next_link={`${base}page/${pagination.currentPage + 1}`}

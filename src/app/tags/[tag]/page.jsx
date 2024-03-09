@@ -14,7 +14,7 @@ export const generateMetadata = async ({ params: { tag } }) => {
         return true;
       }
       return false;
-    })
+    }),
   );
   if (!postSpecTag) {
     return {
@@ -48,7 +48,7 @@ export default async function TagPage({ params: { tag } }) {
         return true;
       }
       return false;
-    })
+    }),
   );
   if (!postSpecTag) {
     // 404 Not Found
@@ -60,9 +60,7 @@ export default async function TagPage({ params: { tag } }) {
       {" "}
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">{tagName}</h1>
-        <span className="text-black/60 dark:text-white/60">
-          共 {postSpecTag.length} 篇文章
-        </span>
+        <span className="text-black/60 dark:text-white/60">共 {postSpecTag.length} 篇文章</span>
       </div>
       <ArchivesList posts={postSpecTag} />
     </>

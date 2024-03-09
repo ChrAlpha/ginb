@@ -7,26 +7,26 @@ import { sitename } from "/_config";
 export const NavBar = memo(({ responsive, click = false }) => {
   return (
     <>
-      <nav className={responsive + " flex-col md:flex-row gap-6"}>
-        <Link className="hidden md:block my-auto" href="/">
+      <nav className={responsive + " flex-col gap-6 md:flex-row"}>
+        <Link className="my-auto hidden md:block" href="/">
           <h2 className="inline text-xl">{sitename}</h2>
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
+          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/"
           onClick={click}
         >
           首页
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
+          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/archives/"
           onClick={click}
         >
           归档
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
+          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/tags/"
           onClick={click}
         >
@@ -40,21 +40,21 @@ export const NavBar = memo(({ responsive, click = false }) => {
 const Header = () => {
   return (
     <>
-      <header className="order-first flex items-stretch sticky top-0 z-50 w-full min-h-header border-b bg-white dark:bg-black md:bg-white/90 md:dark:bg-black/80 md:backdrop-blur-sm">
-        <div className="flex justify-between items-stretch container max-w-screen-xl w-full mx-auto px-4">
+      <header className="sticky top-0 z-50 order-first flex min-h-header w-full items-stretch border-b bg-white dark:bg-black md:bg-white/90 md:backdrop-blur-sm md:dark:bg-black/80">
+        <div className="container mx-auto flex w-full max-w-screen-xl items-stretch justify-between px-4">
           <Sidebar />
           <NavBar responsive="hidden md:flex" />
-          <div className="relative flex flex-row gap-4 items-center">
+          <div className="relative flex flex-row items-center gap-4">
             <ToggleTheme />
             <Link
-              className="text-[#666] dark:text-[#888] hover:text-black dark:hover:text-white focus:outline-none"
+              className="text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
               href="/rss"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-6 h-6"
+                className="h-6 w-6"
               >
                 <path
                   fillRule="evenodd"

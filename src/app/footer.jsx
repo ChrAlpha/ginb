@@ -4,8 +4,8 @@ import { footer } from "/_config";
 const Footer = async () => {
   return (
     <>
-      <footer className="h-12 border-t mt-auto p-4 text-xs text-black/60 dark:text-white/60">
-        <p className="container max-w-screen-xl w-full mx-auto">
+      <footer className="mt-auto h-12 border-t p-4 text-xs text-black/60 dark:text-white/60">
+        <p className="container mx-auto w-full max-w-screen-xl">
           Copyright © {new Date().getFullYear()}
           {footer && (
             <>

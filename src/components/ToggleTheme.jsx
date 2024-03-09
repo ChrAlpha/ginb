@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-  useCallback,
-  memo,
-} from "react";
+import { useState, useEffect, useContext, createContext, useCallback, memo } from "react";
 
 const ThemeContext = createContext();
 
@@ -44,7 +37,7 @@ export const ThemeProviders = memo(({ children }) => {
         setColorScheme("light");
       }
     },
-    [setColorScheme]
+    [setColorScheme],
   );
 
   useEffect(() => {
@@ -92,8 +85,7 @@ export const ToggleTheme = memo(({ responsive }) => {
         console.error("color must be system, light or dark");
       } else {
         setTheme(color);
-        typeof window !== "undefined" &&
-          localStorage.setItem("user-color-scheme", color);
+        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", color);
         if (color == "light" || color == "dark") {
           if (document.documentElement.className != color) {
             document.documentElement.className = color;
@@ -101,21 +93,18 @@ export const ToggleTheme = memo(({ responsive }) => {
         }
       }
     },
-    [setTheme]
+    [setTheme],
   );
 
   const handleClickOutside = useCallback(
     (e) => {
-      if (
-        e.target.closest("#toggle-theme-button") ||
-        e.target.closest("#toggle-theme-menu")
-      ) {
+      if (e.target.closest("#toggle-theme-button") || e.target.closest("#toggle-theme-menu")) {
         return;
       } else {
         setIsToggleOpen(false);
       }
     },
-    [setIsToggleOpen]
+    [setIsToggleOpen],
   );
 
   useEffect(() => {
@@ -137,14 +126,14 @@ export const ToggleTheme = memo(({ responsive }) => {
         id="toggle-theme-button"
         aria-label="切换主题"
         className={
-          "text-[#666] dark:text-[#888] hover:text-black dark:hover:text-white focus:outline-none" +
+          "text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white" +
           (responsive ? " " + responsive : "")
         }
         type="button"
         onClick={() => setIsToggleOpen(!isToggleOpen)}
       >
         <svg
-          className="w-6 h-6 m-auto"
+          className="m-auto h-6 w-6"
           stroke="currentColor"
           fill="none"
           strokeWidth={2}
@@ -160,22 +149,20 @@ export const ToggleTheme = memo(({ responsive }) => {
           <path d="M12 9l4.5 -4.5" />
         </svg>
       </button>
-      <div
-        className={(isToggleOpen ? "absolute" : "hidden") + " top-12 right-0"}
-      >
+      <div className={(isToggleOpen ? "absolute" : "hidden") + " right-0 top-12"}>
         <div
           id="toggle-theme-menu"
-          className="block mt-1 p-2 min-w-min box-content border rounded-lg bg-white dark:bg-black"
+          className="mt-1 box-content block min-w-min rounded-lg border bg-white p-2 dark:bg-black"
         >
           <button
             id="toggle-theme-light-button"
             aria-label="总是亮色"
-            className="flex flex-row mx-auto p-2 text-black/60 dark:text-white/60 rounded-lg hover:bg-black/10 dark:hover:bg-white/20"
+            className="mx-auto flex flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
             onClick={() => toggleTheme("light")}
           >
             {theme == "light" ? (
               <svg
-                className="w-6 h-4 px-1 m-auto"
+                className="m-auto h-4 w-6 px-1"
                 fill="none"
                 height="24"
                 shapeRendering="geometricPrecision"
@@ -192,7 +179,7 @@ export const ToggleTheme = memo(({ responsive }) => {
               <span className="w-6"></span>
             )}
             <svg
-              className="w-6 h-4 px-1 m-auto"
+              className="m-auto h-4 w-6 px-1"
               data-testid="geist-icon"
               fill="none"
               height="24"
@@ -214,17 +201,17 @@ export const ToggleTheme = memo(({ responsive }) => {
               <path d="M4.22 19.78l1.42-1.42"></path>
               <path d="M18.36 5.64l1.42-1.42"></path>
             </svg>
-            <span className="break-keep min-w-min">总是亮色</span>
+            <span className="min-w-min break-keep">总是亮色</span>
           </button>
           <button
             id="toggle-theme-dark-button"
             aria-label="总是暗色"
-            className="flex flex-row mx-auto p-2 text-black/60 dark:text-white/60 rounded-lg hover:bg-black/10 dark:hover:bg-white/20"
+            className="mx-auto flex flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
             onClick={() => toggleTheme("dark")}
           >
             {theme == "dark" ? (
               <svg
-                className="w-6 h-4 px-1 m-auto"
+                className="m-auto h-4 w-6 px-1"
                 fill="none"
                 height="24"
                 shapeRendering="geometricPrecision"
@@ -241,7 +228,7 @@ export const ToggleTheme = memo(({ responsive }) => {
               <span className="w-6"></span>
             )}
             <svg
-              className="w-6 h-4 px-1 m-auto"
+              className="m-auto h-4 w-6 px-1"
               data-testid="geist-icon"
               fill="none"
               height="24"
@@ -255,17 +242,17 @@ export const ToggleTheme = memo(({ responsive }) => {
             >
               <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
             </svg>
-            <span className="break-keep min-w-min">总是暗色</span>
+            <span className="min-w-min break-keep">总是暗色</span>
           </button>
           <button
             id="toggle-theme-system-button"
             aria-label="跟随系统"
-            className="flex flex-row mx-auto p-2 text-black/60 dark:text-white/60 rounded-lg hover:bg-black/10 dark:hover:bg-white/20"
+            className="mx-auto flex flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
             onClick={() => toggleTheme("system")}
           >
             {theme != "light" && theme != "dark" ? (
               <svg
-                className="w-6 h-4 px-1 m-auto"
+                className="m-auto h-4 w-6 px-1"
                 fill="none"
                 height="24"
                 shapeRendering="geometricPrecision"
@@ -282,7 +269,7 @@ export const ToggleTheme = memo(({ responsive }) => {
               <span className="w-6"></span>
             )}
             <svg
-              className="w-6 h-4 px-1 m-auto"
+              className="m-auto h-4 w-6 px-1"
               data-testid="geist-icon"
               fill="none"
               height="24"
@@ -298,7 +285,7 @@ export const ToggleTheme = memo(({ responsive }) => {
               <path d="M8 21h8"></path>
               <path d="M12 17v4"></path>
             </svg>
-            <span className="break-keep min-w-min">跟随系统</span>
+            <span className="min-w-min break-keep">跟随系统</span>
           </button>
         </div>
       </div>

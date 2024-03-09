@@ -5,8 +5,8 @@ import Image from "next/image";
 export const Author = memo(() => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="h-min w-full flex flex-row md:flex-col gap-4 items-center">
-        <div className="w-24 md:w-2/3 rounded-full flex-shrink-0">
+      <div className="flex h-min w-full flex-row items-center gap-4 md:flex-col">
+        <div className="w-24 flex-shrink-0 rounded-full md:w-2/3">
           <Image
             className="rounded-full"
             src={`https://github.com/${siteConfig.username}.png`}
@@ -17,19 +17,19 @@ export const Author = memo(() => {
         </div>
         <div>
           <h2 className="w-full font-light">{siteConfig.username}</h2>
-          <div className="flex-initial w-full text-sm text-black/60 dark:text-white/60">
+          <div className="w-full flex-initial text-sm text-black/60 dark:text-white/60">
             {siteConfig.description}
           </div>
         </div>
       </div>
       {siteConfig.social && (
-        <ul className="flex flex-col list-none text-sm gap-2">
+        <ul className="flex list-none flex-col gap-2 text-sm">
           {Object.keys(siteConfig.social).map((key) => (
             <li key={key}>
               <a
                 href={siteConfig.social[key]}
                 target="_blank"
-                className="text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
+                className="text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
               >
                 {key}
               </a>
