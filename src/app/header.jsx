@@ -46,8 +46,9 @@ const Header = () => {
           <NavBar responsive="hidden md:flex" />
           <div className="relative flex flex-row items-center gap-4">
             <ToggleTheme />
-            <Link
+            <a
               className="text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
+              _target="blank"
               href="/rss"
             >
               <svg
@@ -62,7 +63,7 @@ const Header = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </header>
