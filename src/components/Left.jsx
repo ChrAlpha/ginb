@@ -6,12 +6,12 @@ export const Author = memo(() => {
   return (
     <div className="flex flex-col gap-4">
       <div className="h-min w-full flex flex-row md:flex-col gap-4 items-center">
-        <div className="w-24 md:w-full rounded-full flex-shrink-0">
+        <div className="w-24 md:w-2/3 rounded-full flex-shrink-0">
           <Image
             className="rounded-full"
             src={`https://github.com/${siteConfig.username}.png`}
-            width={288}
-            height={288}
+            width={192}
+            height={192}
             alt="Avatar"
           />
         </div>
