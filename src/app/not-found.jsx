@@ -10,7 +10,7 @@ function NotFound() {
         <Link className="text-blue-600 hover:underline" href="/">
           Back to homepage
         </Link>{" "}
-        if it doesn&apos;t matter. Otherwise feel free to contact `hi@chralpha.com`.
+        if it doesn&apos;t matter. Otherwise feel free to contact owner.
       </p>
     </div>
   );

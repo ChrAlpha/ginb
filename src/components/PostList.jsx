@@ -2,6 +2,7 @@ import Link from "next/link";
 import { slug } from "github-slugger";
 import { memo } from "react";
 import { post_per_page } from "/_config";
+import { notFound } from "next/navigation";
 
 const formatDate = (date) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -71,7 +72,7 @@ export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, 
     prevProps.name = "div";
     prevProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
   }
-  if (next && next != 0) {
+  if (next && next != 0 && next <= total) {
     nextProps.name = Link;
     nextProps.className =
       "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
@@ -128,6 +129,9 @@ const PostList = async ({ base, current = 1, posts }) => {
     currentPage: pageNumber,
     totalPages: Math.max(Math.ceil(posts.length / post_per_page), 1),
   };
+  if (currentPosts.length === 0) {
+    return notFound();
+  }
   return (
     <>
       <ul className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-2">
