@@ -10,7 +10,8 @@ ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Nex
 
 1. Fork 本仓库
 2. 修改 `_config.js` 文件中的 `sitename` 和 `description` 字段，有意绑定域名的亦需修改 `url`
-3. 在 Vercel 关联你的仓库并部署
+3. 在 Vercel 关联你的仓库，将环境变量 `GITHUB_TOKEN` 设置为你的 [GitHub Personal Access Token](https://github.com/settings/tokens)
+4. 部署 🚀
 
 更多配置请参考 Wiki。
 
@@ -28,8 +29,8 @@ ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Nex
 
 ## 相关项目
 
-- front-end framework: [Next.js](https://nextjs.org/)
-- front-end style: [Tailwind CSS](https://tailwindcss.com/)
+- Front-end framework: [Next.js](https://nextjs.org/)
+- Front-end style: [Tailwind CSS](https://tailwindcss.com/)
 - CMS: [GitHub Issues](https://docs.github.com/en/rest/reference/issues)
 - Markdown content parser: [react-markdown](https://github.com/remarkjs/react-markdown)
 - Syntax highlighter: [rehype-highlight](https://github.com/rehypejs/rehype-highlight)
