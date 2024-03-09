@@ -19,32 +19,21 @@ const formatDate = (date) => {
   return formatter.format(new Date(date));
 };
 
-const PostContent = async ({
-  title,
-  created_at,
-  updated_at,
-  contentRaw,
-  tags,
-  slug,
-  path,
-  comments,
-  html_url,
-}) => {
+const PostContent = async ({ title, created_at, contentRaw, tags, comments, html_url }) => {
   return (
-    <article className="mt-8 md:mt-0 border rounded-lg">
+    <article className="mt-8 rounded-lg border md:mt-0">
       <div className="p-4">
         <h1 className="text-2xl">{title}</h1>
         <div className="mt-4 text-sm text-black/60 dark:text-white/60">
           <span>{formatDate(created_at)}</span>
         </div>
-        <div className="max-w-none mt-4 prose dark:prose-invert prose-pre:bg-transparent prose-pre:rounded-none prose-pre:-mx-4 prose-pre:p-0 prose-pre:overflow-x-auto prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-black/60 dark:prose-blockquote:text-white/60 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:font-normal prose-code:bg-gray-300/30 prose-code:py-0.5 prose-code:px-1 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-table:overflow-x-auto">
+        <div className="prose mt-4 max-w-none dark:prose-invert prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-black/60 prose-code:rounded-md prose-code:bg-gray-300/30 prose-code:px-1 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:-mx-4 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:bg-transparent prose-pre:p-0 prose-table:overflow-x-auto dark:prose-blockquote:text-white/60">
           <Markdown
-            children={contentRaw}
             remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
             components={{
               table: (props) => {
-                const { children, className, node, ...rest } = props;
+                const { children, className, ...rest } = props;
                 return (
                   <div className="overflow-x-auto">
                     <table className={className} {...rest}>
@@ -54,7 +43,9 @@ const PostContent = async ({
                 );
               },
             }}
-          />
+          >
+            {contentRaw}
+          </Markdown>
         </div>
       </div>
       <div className="flex justify-between border-t p-4">
@@ -62,7 +53,7 @@ const PostContent = async ({
           {tags.map((tag) => (
             <Link
               key={slugger(tag)}
-              className="text-black/60 dark:text-white/60 hover:underline before:content-['#']"
+              className="text-black/60 before:content-['#'] hover:underline dark:text-white/60"
               href={"/tags/" + slugger(tag)}
             >
               {tag}
@@ -70,13 +61,13 @@ const PostContent = async ({
           ))}
         </div>
         {comments > 0 && (
-          <div className="text-black/60 dark:text-white/60 hover:underline">
+          <div className="text-black/60 hover:underline dark:text-white/60">
             <Link className="flex flex-row" href={html_url} target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="w-4 h-4 my-auto"
+                className="my-auto h-4 w-4"
               >
                 <path
                   fillRule="evenodd"

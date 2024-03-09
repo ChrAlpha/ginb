@@ -32,13 +32,10 @@ export default async function Tags() {
       </div>
       <div className="flex flex-col gap-4">
         {Object.keys(allTagsWithCount).map((tag) => (
-          <Link href={"/tags/" + slug(tag)}>
-            <div
-              className="flex justify-between rounded-lg border w-full p-4"
-              key={tag}
-            >
+          <Link key={tag} href={"/tags/" + slug(tag)}>
+            <div className="flex w-full justify-between rounded-lg border p-4">
               <span>{tag}</span>
-              <span className="block my-auto text-sm text-black/60 dark:text-white/60">
+              <span className="my-auto block text-sm text-black/60 dark:text-white/60">
                 {allTagsWithCount[tag]} 篇
               </span>
             </div>
