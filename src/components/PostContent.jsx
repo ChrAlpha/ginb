@@ -37,11 +37,23 @@ const PostContent = async ({
         <div className="mt-4 text-sm text-black/60 dark:text-white/60">
           <span>{formatDate(created_at)}</span>
         </div>
-        <div className="max-w-none mt-4 prose dark:prose-invert prose-pre:bg-transparent prose-pre:rounded-none prose-pre:-mx-4 prose-pre:p-0 prose-pre:overflow-x-auto prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-black/60 dark:prose-blockquote:text-white/60 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:font-normal prose-code:bg-gray-300/30 prose-code:py-0.5 prose-code:px-1 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+        <div className="max-w-none mt-4 prose dark:prose-invert prose-pre:bg-transparent prose-pre:rounded-none prose-pre:-mx-4 prose-pre:p-0 prose-pre:overflow-x-auto prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-black/60 dark:prose-blockquote:text-white/60 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:font-normal prose-code:bg-gray-300/30 prose-code:py-0.5 prose-code:px-1 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-table:overflow-x-auto">
           <Markdown
             children={contentRaw}
             remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
+            components={{
+              table: (props) => {
+                const { children, className, node, ...rest } = props;
+                return (
+                  <div className="overflow-x-auto">
+                    <table className={className} {...rest}>
+                      {children}
+                    </table>
+                  </div>
+                );
+              },
+            }}
           />
         </div>
       </div>
