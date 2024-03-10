@@ -16,21 +16,21 @@ export const NavBar = memo(({ responsive, click = false }) => {
           href="/"
           onClick={click}
         >
-          首页
+          Home
         </Link>
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/archives/"
           onClick={click}
         >
-          归档
+          Archives
         </Link>
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/tags/"
           onClick={click}
         >
-          标签
+          Tags
         </Link>
       </nav>
     </>

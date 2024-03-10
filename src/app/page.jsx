@@ -3,9 +3,9 @@ import { blogInit } from "/src/utils/blogInit";
 import { sitename } from "/_config";
 
 export const metadata = {
-  title: "首页 ｜ " + sitename,
+  title: "首页 | " + sitename,
   openGraph: {
-    title: "首页 ｜ " + sitename,
+    title: "首页 | " + sitename,
   },
 };
 

@@ -4,9 +4,9 @@ import { sitename } from "/_config";
 
 export const generateMetadata = ({ params: { page } }) => {
   return {
-    title: `第 ${page} 页 ｜ ${sitename}`,
+    title: `Page ${page} | ${sitename}`,
     openGraph: {
-      title: `第 ${page} 页 ｜ ${sitename}`,
+      title: `Page ${page} | ${sitename}`,
     },
   };
 };

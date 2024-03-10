@@ -8,9 +8,9 @@ export const generateMetadata = async ({ params: { slug } }) => {
   const post = posts.find((post) => post.slug == slug);
   if (!post) {
     return {
-      title: `404 Not Found ｜ ${sitename}`,
+      title: `404 Not Found | ${sitename}`,
       openGraph: {
-        title: `404 Not Found ｜ ${sitename}`,
+        title: `404 Not Found | ${sitename}`,
       },
       robots: {
         index: false,
@@ -18,11 +18,11 @@ export const generateMetadata = async ({ params: { slug } }) => {
     };
   }
   return {
-    title: `${post.title} ｜ ${sitename}`,
+    title: `${post.title} | ${sitename}`,
     keywords: post.tags.concat(keywords),
     description: post.contentRaw.slice(0, 150),
     openGraph: {
-      title: `${post.title} ｜ ${sitename}`,
+      title: `${post.title} | ${sitename}`,
       description: post.contentRaw.slice(0, 150),
       type: "article",
     },

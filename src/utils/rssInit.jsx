@@ -8,7 +8,6 @@ export const generateRssFeed = cache((posts) => {
     description: description,
     id: url,
     link: url,
-    language: "zh-CN",
     feedLinks: {
       rss2: `${url}/feed`,
     },

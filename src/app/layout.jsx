@@ -54,7 +54,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className="break-words dark:bg-black dark:text-white">
         <ThemeProviders>
           <Header />

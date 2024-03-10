@@ -18,9 +18,9 @@ export const generateMetadata = async ({ params: { tag } }) => {
   );
   if (!postSpecTag) {
     return {
-      title: `404 Not Found ｜ ${sitename}`,
+      title: `404 Not Found | ${sitename}`,
       openGraph: {
-        title: `404 Not Found ｜ ${sitename}`,
+        title: `404 Not Found | ${sitename}`,
       },
       robots: {
         index: false,
@@ -28,12 +28,12 @@ export const generateMetadata = async ({ params: { tag } }) => {
     };
   }
   return {
-    title: `标签：${tagName} ｜ ${sitename}`,
-    description: `${sitename} 下标签为 ${tagName} 的所有文章。`,
+    title: `Tag: ${tagName} | ${sitename}`,
+    description: `All posts including ${tagName} tag in ${sitename}.`,
     keywords: [tagName].concat(keywords),
     openGraph: {
-      title: `标签：${tagName} ｜ ${sitename}`,
-      description: `${sitename} 下标签为 ${tagName} 的所有文章。`,
+      title: `Tag: ${tagName} | ${sitename}`,
+      description: `All posts including ${tagName} tag in ${sitename}.`,
     },
   };
 };
@@ -60,7 +60,9 @@ export default async function TagPage({ params: { tag } }) {
       {" "}
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">{tagName}</h1>
-        <span className="text-black/60 dark:text-white/60">共 {postSpecTag.length} 篇文章</span>
+        <span className="text-black/60 dark:text-white/60">
+          {postSpecTag.length} posts in total
+        </span>
       </div>
       <ArchivesList posts={postSpecTag} />
     </>
