@@ -6,6 +6,8 @@ GitHub Issues Next.js Blog
 
 ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Next.js 作为前端框架的博客模板。
 
+ginb (GitHub Issues Next.js Blog) is a blog template that uses GitHub Issues as a CMS and Next.js as the frontend framework.
+
 ## 使用 Usage
 
 1. Fork 本仓库
@@ -13,11 +15,22 @@ ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Nex
 3. 在 Vercel 关联你的仓库，将环境变量 `GITHUB_TOKEN` 设置为你的 [GitHub Personal Access Token](https://github.com/settings/tokens)
 4. 部署 🚀
 
+---
+
+1. Fork this repository.
+2. Modify the `sitename` and `description` fields in the `_config.js` file. If you plan to bind a domain name, also modify the `url`.
+3. Link your repository to Vercel and set the `GITHUB_TOKEN` environment variable to your [GitHub Personal Access Token](https://github.com/settings/tokens).
+4. Deploy 🚀
+
 更多配置请参考 Wiki。
+
+For more configuration, please refer to the Wiki.
 
 ## 贡献 Contribution
 
 欢迎各种形式的贡献，包括但不限于：主题优化，功能添加，代码改进，bug 反馈。期待你的参与！
+
+All kinds of contributions are welcomed, including but not limited to theme optimization, feature addition, code improvement, and bug feedback. Looking forward to your participation!
 
 ## TODO
 
@@ -27,7 +40,7 @@ ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Nex
 - [ ] Comments in post
 - [ ] Your idea...
 
-## 相关项目
+## 相关项目 Related Projects
 
 - Front-end framework: [Next.js](https://nextjs.org/)
 - Front-end style: [Tailwind CSS](https://tailwindcss.com/)
