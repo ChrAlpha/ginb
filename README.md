@@ -8,6 +8,16 @@ ginb (GitHub Issues Next.js Blog) 是一个基于 GitHub Issues 作为 CMS、Nex
 
 ginb (GitHub Issues Next.js Blog) is a blog template that uses GitHub Issues as a CMS and Next.js as the frontend framework.
 
+## 特性 Features
+
+- [x] Dark mode
+- [x] GitHub flavored markdown
+- [x] Syntax highlight
+- [x] KaTeX support
+- [x] Labels used as tags
+- [x] Metadata for SEO optimization
+- [x] RSS feed
+
 ## 使用 Usage
 
 1. Fork 本仓库
