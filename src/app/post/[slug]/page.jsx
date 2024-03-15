@@ -1,11 +1,10 @@
 import PostContent from "/src/components/PostContent";
-import { blogInit } from "/src/utils/blogInit";
+import { getPostBySlug } from "/src/utils/blogInit";
 import { notFound } from "next/navigation";
 import { sitename, keywords } from "/_config";
 
 export const generateMetadata = async ({ params: { slug } }) => {
-  const posts = await blogInit();
-  const post = posts.find((post) => post.slug == slug);
+  const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     return {
       title: `404 Not Found | ${sitename}`,
@@ -29,10 +28,8 @@ export const generateMetadata = async ({ params: { slug } }) => {
   };
 };
 
-export default async function PostPage({ params }) {
-  const posts = await blogInit();
-  const { slug } = params;
-  const post = posts.find((post) => post.slug == slug);
+export default async function PostPage({ params: { slug } }) {
+  const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     // 404 Not Found
     return notFound();

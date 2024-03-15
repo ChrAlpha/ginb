@@ -1,13 +1,14 @@
 import { Octokit } from "octokit";
 import { cache } from "react";
+import { slug as slugger } from "github-slugger";
 import { username, repository } from "/_config";
 
 export const blogInit = cache(async () => {
-  function formatIssues(issues) {
+  const formatIssues = (issues) => {
     return issues.map((issue) => ({
       title: issue.title,
-      slug: issue.number,
-      path: `post/${issue.number}`,
+      slug: slugger(String(issue.number)),
+      path: `post/${slugger(String(issue.number))}`,
       api: issue.url,
       html_url: issue.html_url,
       created_at: issue.created_at,
@@ -18,7 +19,7 @@ export const blogInit = cache(async () => {
       comments: issue.comments,
       // content: <Markdown>{issue.body}</Markdown>,
     }));
-  }
+  };
 
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -31,4 +32,14 @@ export const blogInit = cache(async () => {
   });
 
   return formatIssues(issues.filter((issue) => !issue.pull_request));
+});
+
+export const getPostBySlug = cache(async (slug) => {
+  const posts = await blogInit();
+  return posts.find((post) => slugger(post.slug) === slugger(slug));
+});
+
+export const getPostsByTag = cache(async (tag) => {
+  const posts = await blogInit();
+  return posts.filter((post) => post.tags.some((t) => slugger(t) === slugger(tag)));
 });
