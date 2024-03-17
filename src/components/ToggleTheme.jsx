@@ -66,7 +66,7 @@ export const ThemeProviders = memo(({ children }) => {
       <script
         dangerouslySetInnerHTML={{
           __html:
-            "!function(){const e=localStorage.getItem('user-color-scheme');'light'==e||'dark'==e?document.documentElement.classList.contains(e)||document.documentElement.classList.add(e):document.documentElement.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'')}();",
+            "!function(){let e=localStorage.getItem('user-color-scheme');'dark'!=e||document.documentElement.classList.contains('dark')?'light'!=e&&window.matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.classList.add('dark'):document.documentElement.classList.add('dark')}();",
         }}
       />
       {children}
