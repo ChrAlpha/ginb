@@ -53,8 +53,10 @@ export const ThemeProviders = memo(({ children }) => {
 
   useEffect(() => {
     if (theme == "system") {
-      if (document.documentElement.className != colorScheme) {
-        document.documentElement.className = colorScheme;
+      if (colorScheme == "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
       }
     }
   }, [theme, colorScheme]);
@@ -64,7 +66,7 @@ export const ThemeProviders = memo(({ children }) => {
       <script
         dangerouslySetInnerHTML={{
           __html:
-            "!function(){const e=localStorage.getItem('user-color-scheme');'light'==e||'dark'==e?document.documentElement.classList.contains(e)||(document.documentElement.classList=[e]):document.documentElement.classList=[window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light']}();",
+            "!function(){const e=localStorage.getItem('user-color-scheme');'light'==e||'dark'==e?document.documentElement.classList.contains(e)||document.documentElement.classList.add(e):document.documentElement.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'')}();",
         }}
       />
       {children}
@@ -84,10 +86,10 @@ export const ToggleTheme = memo(({ responsive }) => {
       } else {
         setTheme(color);
         typeof window !== "undefined" && localStorage.setItem("user-color-scheme", color);
-        if (color == "light" || color == "dark") {
-          if (document.documentElement.className != color) {
-            document.documentElement.className = color;
-          }
+        if (color == "light") {
+          document.documentElement.classList.remove("dark");
+        } else if (color == "dark") {
+          document.documentElement.classList.add("dark");
         }
       }
     },
