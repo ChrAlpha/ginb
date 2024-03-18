@@ -54,22 +54,18 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html suppressHydrationWarning>
-      <body className="break-words dark:bg-black dark:text-white">
-        <ThemeProviders>
-          <Header />
-          <div className="container mx-auto min-h-[calc(100vh_-_96px)] max-w-screen-xl p-4 md:flex md:gap-4">
-            <div className="md:max-w-[calc(100%_-_272px)] md:flex-1 lg:max-w-[calc(100%_-_304px)]">
-              {children}
-            </div>
-            <div className="md:order-first md:basis-64 lg:basis-72">
-              <hr className="mx-auto my-12 w-2/3 md:hidden" />
-              <Left />
-            </div>
-          </div>
-          <Footer />
-        </ThemeProviders>
-      </body>
-    </html>
+    <ThemeProviders>
+      <Header />
+      <div className="container mx-auto min-h-[calc(100vh_-_96px)] max-w-screen-xl p-4 md:flex md:gap-4">
+        <div className="md:max-w-[calc(100%_-_272px)] md:flex-1 lg:max-w-[calc(100%_-_304px)]">
+          {children}
+        </div>
+        <div className="md:order-first md:basis-64 lg:basis-72">
+          <hr className="mx-auto my-12 w-2/3 md:hidden" />
+          <Left />
+        </div>
+      </div>
+      <Footer />
+    </ThemeProviders>
   );
 }
