@@ -50,6 +50,7 @@ const Header = () => {
               className="text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
               _target="blank"
               href="/rss"
+              aria-label="RSS feed of this site"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
