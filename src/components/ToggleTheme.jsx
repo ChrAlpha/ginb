@@ -62,19 +62,16 @@ export const ThemeProviders = memo(({ children }) => {
   }, [theme, colorScheme]);
 
   return (
-    <html suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "!function(){let e=localStorage.getItem('user-color-scheme');'dark'!=e||document.documentElement.classList.contains('dark')?'light'!=e&&window.matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.classList.add('dark'):document.documentElement.classList.add('dark')}();",
-          }}
-        />
-      </head>
-      <body className="break-words dark:bg-black dark:text-white">
-        <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
-      </body>
-    </html>
+    <>
+      <script
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html:
+            '!function(){const e=localStorage.getItem("user-color-scheme");"dark"===e||window.window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}()',
+        }}
+      />
+      <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+    </>
   );
 });
 
