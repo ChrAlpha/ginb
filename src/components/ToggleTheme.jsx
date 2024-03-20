@@ -67,7 +67,7 @@ export const ThemeProviders = memo(({ children }) => {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html:
-            '!function(){const e=localStorage.getItem("user-color-scheme");"dark"===e||window.window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}()',
+            '!function(){const e=localStorage.getItem("user-color-scheme");"dark"===e||!e&&window.window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}()',
         }}
       />
       <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
