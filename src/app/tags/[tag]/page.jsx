@@ -8,7 +8,7 @@ export const generateMetadata = async ({ params: { tag } }) => {
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (!postsWithSpecTag) {
     return {
-      title: `404 Not Found | ${sitename}`,
+      title: `404 Not Found`,
       openGraph: {
         title: `404 Not Found | ${sitename}`,
       },
@@ -18,7 +18,7 @@ export const generateMetadata = async ({ params: { tag } }) => {
     };
   }
   return {
-    title: `Tag: ${tagName} | ${sitename}`,
+    title: `Tag: ${tagName}`,
     description: `All posts including ${tagName} tag in ${sitename}.`,
     keywords: [tagName].concat(keywords),
     openGraph: {

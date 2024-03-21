@@ -4,9 +4,13 @@ import { sitename } from "/_config";
 
 export const generateMetadata = ({ params: { page } }) => {
   return {
-    title: `Page ${page} | ${sitename}`,
+    title: `Page ${page}`,
     openGraph: {
       title: `Page ${page} | ${sitename}`,
+      description: description,
+      siteName: sitename,
+      url: "/",
+      type: "website",
     },
   };
 };

@@ -1,11 +1,15 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/utils/blogInit";
-import { sitename } from "/_config";
+import { sitename, description } from "/_config";
 
 export const metadata = {
-  title: "首页 | " + sitename,
+  title: "Home | " + sitename,
   openGraph: {
-    title: "首页 | " + sitename,
+    title: "Home | " + sitename,
+    description: description,
+    siteName: sitename,
+    url: "/",
+    type: "website",
   },
 };
 

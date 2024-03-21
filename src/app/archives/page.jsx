@@ -3,11 +3,15 @@ import { ArchivesList } from "/src/components/ArchivesList";
 import { sitename } from "/_config";
 
 export const metadata = {
-  title: `Archives | ${sitename}`,
+  title: `Archives`,
+  siteName: sitename,
   descriptopn: `Archive all posts in ${sitename}.`,
   openGraph: {
-    title: `Archive all posts in | ${sitename}`,
+    title: `Archives | ${sitename}`,
     descriptopn: `Archive all posts in ${sitename}.`,
+    siteName: sitename,
+    url: "/",
+    type: "website",
   },
 };
 

@@ -4,11 +4,14 @@ import { slug } from "github-slugger";
 import { sitename } from "/_config";
 
 export const metadata = {
-  title: `Tags | ${sitename}`,
+  title: `Tags`,
   description: `All tags in posts of ${sitename}.`,
   openGraph: {
     title: `Tags | ${sitename}`,
     description: `All tags in posts of ${sitename}.`,
+    siteName: sitename,
+    url: "/",
+    type: "website",
   },
 };
 

@@ -9,14 +9,18 @@ export const runtime = "edge";
 
 export const metadata = {
   metadataBase: new URL(url),
-  title: sitename,
+  title: {
+    template: `%s | ${sitename}`,
+    default: sitename,
+  },
   description: description,
   keywords: keywords,
   author: username,
   openGraph: {
     title: sitename,
-    siteName: sitename,
     description: description,
+    siteName: sitename,
+    url: "/",
     images: [
       {
         url: favicon,

@@ -1,13 +1,13 @@
 import PostContent from "/src/components/PostContent";
 import { getPostBySlug } from "/src/utils/blogInit";
 import { notFound } from "next/navigation";
-import { sitename, keywords } from "/_config";
+import { sitename, keywords, username } from "/_config";
 
 export const generateMetadata = async ({ params: { slug } }) => {
   const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     return {
-      title: `404 Not Found | ${sitename}`,
+      title: `404 Not Found`,
       openGraph: {
         title: `404 Not Found | ${sitename}`,
       },
@@ -17,13 +17,17 @@ export const generateMetadata = async ({ params: { slug } }) => {
     };
   }
   return {
-    title: `${post.title} | ${sitename}`,
+    title: `${post.title}`,
     keywords: post.tags.concat(keywords),
     description: post.contentRaw.slice(0, 150),
     openGraph: {
       title: `${post.title} | ${sitename}`,
       description: post.contentRaw.slice(0, 150),
+      siteName: sitename,
+      url: "/",
       type: "article",
+      authors: [username],
+      tags: post.tags,
     },
   };
 };
