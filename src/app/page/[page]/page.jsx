@@ -1,6 +1,6 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/utils/blogInit";
-import { sitename } from "/_config";
+import { sitename, description } from "/_config";
 
 export const generateMetadata = ({ params: { page } }) => {
   return {

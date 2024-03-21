@@ -15,7 +15,7 @@
   --hljs-markup-inserted-deleted-text: #22863a;
 }
 
-[class='dark'] {
+[class="dark"] {
   --hljs-bg: #0d1117;
   --hljs-text: #c9d1d9;
   --hljs-keyword: #ff7b72;
