@@ -25,6 +25,7 @@ export const ThemeProviders = memo(({ children }) => {
     }
   });
 
+  // 添加事件监听器以响应系统颜色方案更改
   const handleColorSchemeChange = useCallback(
     (event) => {
       if (!event) {
@@ -44,6 +45,7 @@ export const ThemeProviders = memo(({ children }) => {
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", handleColorSchemeChange);
 
+    // 卸载组件时，移除事件监听器
     return () => {
       window
         .matchMedia("(prefers-color-scheme: dark)")
@@ -52,10 +54,21 @@ export const ThemeProviders = memo(({ children }) => {
   }, [handleColorSchemeChange]);
 
   useEffect(() => {
-    if (theme == "system") {
-      if (colorScheme == "dark") {
+    if (theme != "system" && theme != "light" && theme != "dark") {
+      console.error("color must be system, light or dark");
+    } else {
+      if (theme == "system") {
+        typeof window !== "undefined" && localStorage.removeItem("user-color-scheme");
+        if (colorScheme == "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (theme == "dark") {
+        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", theme);
         document.documentElement.classList.add("dark");
-      } else {
+      } else if (theme == "light") {
+        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", theme);
         document.documentElement.classList.remove("dark");
       }
     }
@@ -79,23 +92,6 @@ export const ToggleTheme = memo(({ responsive }) => {
   const [mounted, setMounted] = useState(false);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-
-  const toggleTheme = useCallback(
-    (color) => {
-      if (color != "system" && color != "light" && color != "dark") {
-        console.error("color must be system, light or dark");
-      } else {
-        setTheme(color);
-        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", color);
-        if (color == "light") {
-          document.documentElement.classList.remove("dark");
-        } else if (color == "dark") {
-          document.documentElement.classList.add("dark");
-        }
-      }
-    },
-    [setTheme],
-  );
 
   const handleClickOutside = useCallback(
     (e) => {
@@ -159,7 +155,7 @@ export const ToggleTheme = memo(({ responsive }) => {
             id="toggle-theme-light-button"
             aria-label="Always Light"
             className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
-            onClick={() => toggleTheme("light")}
+            onClick={() => setTheme("light")}
           >
             {theme == "light" ? (
               <svg
@@ -208,7 +204,7 @@ export const ToggleTheme = memo(({ responsive }) => {
             id="toggle-theme-dark-button"
             aria-label="Always Dark"
             className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
-            onClick={() => toggleTheme("dark")}
+            onClick={() => setTheme("dark")}
           >
             {theme == "dark" ? (
               <svg
@@ -249,7 +245,7 @@ export const ToggleTheme = memo(({ responsive }) => {
             id="toggle-theme-system-button"
             aria-label="Follow System"
             className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
-            onClick={() => toggleTheme("system")}
+            onClick={() => setTheme("system")}
           >
             {theme != "light" && theme != "dark" ? (
               <svg
