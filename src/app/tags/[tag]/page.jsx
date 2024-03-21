@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { sitename, keywords } from "/_config";
 
 export const generateMetadata = async ({ params: { tag } }) => {
-  let tagName = "";
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (!postsWithSpecTag) {
     return {
@@ -18,12 +17,12 @@ export const generateMetadata = async ({ params: { tag } }) => {
     };
   }
   return {
-    title: `Tag: ${tagName}`,
-    description: `All posts including ${tagName} tag in ${sitename}.`,
-    keywords: [tagName].concat(keywords),
+    title: `Tag: ${decodeURIComponent(tag)}`,
+    description: `All posts including ${decodeURIComponent(tag)} tag in ${sitename}.`,
+    keywords: [decodeURIComponent(tag)].concat(keywords),
     openGraph: {
-      title: `Tag: ${tagName} | ${sitename}`,
-      description: `All posts including ${tagName} tag in ${sitename}.`,
+      title: `Tag: ${decodeURIComponent(tag)} | ${sitename}`,
+      description: `All posts including ${decodeURIComponent(tag)} tag in ${sitename}.`,
     },
   };
 };
