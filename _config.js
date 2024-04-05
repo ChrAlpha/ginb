@@ -8,7 +8,7 @@ const siteConfig = {
   favicon: "/favicon.ico",
   social: {
     // "Social name": "Social link"
-    // eg. "GitHub@USERNAME": "https://github.com/USERNAME"
+    // "GitHub@USERNAME": "https://github.com/USERNAME"
   },
   footer:
     "Proudly powred by [ginb](https://github.com/ChrAlpha/ginb) based on [Next.js](https://nextjs.org) and [Vercel](https://vercel.com)",
