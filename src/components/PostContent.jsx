@@ -28,6 +28,11 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
           <span>{formatDate(created_at)}</span>
         </div>
         <div className="prose mt-4 max-w-none dark:prose-invert prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-black/60 prose-code:rounded-md prose-code:bg-gray-300/30 prose-code:px-1 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:-mx-4 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:bg-transparent prose-pre:p-0 prose-table:overflow-x-auto dark:prose-blockquote:text-white/60">
+          <style>{`
+            .katex-display {
+              overflow-x: auto;
+            }
+          `}</style>
           <Markdown
             remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
