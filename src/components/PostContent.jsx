@@ -9,6 +9,7 @@ import { slug as slugger } from "github-slugger";
 import { memo } from "react";
 import "/public/github.css";
 import "katex/dist/katex.min.css";
+import Image from "next/image";
 
 const formatDate = (date) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -45,6 +46,25 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
                       {children}
                     </table>
                   </div>
+                );
+              },
+              img: (props) => {
+                const { src, width, height, ...rest } = props;
+                delete rest.node;
+                if (!src) {
+                  return <img {...rest} />;
+                }
+                if (width && height) {
+                  return (
+                    <a href={src} target="_blank" rel="noopener noreferrer">
+                      <Image src={src} width={width} height={height} {...rest} />
+                    </a>
+                  );
+                }
+                return (
+                  <a href={src} target="_blank" rel="noopener noreferrer">
+                    <img src={src} width={width} height={height} {...rest} />
+                  </a>
                 );
               },
             }}
