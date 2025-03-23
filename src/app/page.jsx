@@ -23,5 +23,5 @@ export default async function Page() {
     }
     return 0;
   });
-  return <PostList base={"/"} current={1} posts={posts} />;
+  return <PostList base="/" current={1} posts={posts} />;
 }

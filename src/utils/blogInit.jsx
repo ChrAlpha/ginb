@@ -5,7 +5,7 @@ import { username, repository } from "/_config";
 
 export const blogInit = cache(async () => {
   const formatIssues = (issues) => {
-    return issues.map((issue) => ({
+    return issues.map(issue => ({
       title: issue.title,
       slug: slugger(String(issue.number)),
       path: `post/${slugger(String(issue.number))}`,
@@ -13,7 +13,7 @@ export const blogInit = cache(async () => {
       html_url: issue.html_url,
       created_at: issue.created_at,
       updated_at: issue.updated_at,
-      tags: issue.labels.map((label) => label.name),
+      tags: issue.labels.map(label => label.name),
       summary: issue.body.substring(0, 150),
       contentRaw: issue.body,
       comments: issue.comments,
@@ -31,15 +31,15 @@ export const blogInit = cache(async () => {
     per_page: 100,
   });
 
-  return formatIssues(issues.filter((issue) => !issue.pull_request));
+  return formatIssues(issues.filter(issue => !issue.pull_request));
 });
 
 export const getPostBySlug = cache(async (slug) => {
   const posts = await blogInit();
-  return posts.find((post) => slugger(post.slug) === slugger(slug));
+  return posts.find(post => slugger(post.slug) === slugger(slug));
 });
 
 export const getPostsByTag = cache(async (tag) => {
   const posts = await blogInit();
-  return posts.filter((post) => post.tags.some((t) => slugger(t) === slugger(tag)));
+  return posts.filter(post => post.tags.some(t => slugger(t) === slugger(tag)));
 });

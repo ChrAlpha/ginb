@@ -7,7 +7,7 @@ export const generateMetadata = async ({ params: { tag } }) => {
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (!postsWithSpecTag) {
     return {
-      title: `404 Not Found`,
+      title: "404 Not Found",
       openGraph: {
         title: `404 Not Found | ${sitename}`,
       },
@@ -40,7 +40,9 @@ export default async function TagPage({ params: { tag } }) {
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">{decodeURIComponent(tag)}</h1>
         <span className="text-black/60 dark:text-white/60">
-          {postsWithSpecTag.length} posts in total
+          {postsWithSpecTag.length}
+          {" "}
+          posts in total
         </span>
       </div>
       <ArchivesList posts={postsWithSpecTag} />

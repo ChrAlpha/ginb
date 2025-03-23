@@ -43,7 +43,8 @@ export const ArchivesList = memo(({ posts }) => {
               />
             </>
           );
-        } else {
+        }
+        else {
           return (
             <ArchivesEntry
               key={post.slug}

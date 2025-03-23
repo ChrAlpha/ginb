@@ -13,8 +13,7 @@
   },
   "lint-staged": {
     "./src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint --fix"
     ]
   },
   "repository": {
@@ -52,14 +51,15 @@
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.7",
+    "@eslint/eslintrc": "^3.3.1",
+    "@stylistic/eslint-plugin": "^4.2.0",
     "dotenv": "^16.4.7",
-    "eslint": "^8.57.1",
+    "eslint": "^9.23.0",
     "eslint-config-next": "^14.2.25",
-    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "0.5.4"
+    "lint-staged": "^15.5.0"
   },
   "engines": {
     "node": ">=18.17.0"

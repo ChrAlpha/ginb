@@ -3,7 +3,7 @@ import { ArchivesList } from "/src/components/ArchivesList";
 import { sitename } from "/_config";
 
 export const metadata = {
-  title: `Archives`,
+  title: "Archives",
   siteName: sitename,
   descriptopn: `Archive all posts in ${sitename}.`,
   openGraph: {
@@ -22,7 +22,11 @@ export default async function Archives() {
     <>
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">Archives</h1>
-        <span className="text-black/60 dark:text-white/60">{posts.length} Posts in total</span>
+        <span className="text-black/60 dark:text-white/60">
+          {posts.length}
+          {" "}
+          Posts in total
+        </span>
       </div>
       <ArchivesList posts={posts} />
     </>

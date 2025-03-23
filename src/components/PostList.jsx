@@ -24,8 +24,8 @@ export const PostCard = memo(
         <div className="flex justify-between">
           <div className="text-sm text-black/60 dark:text-white/60">
             <span>{formatDate(created_at)}</span>
-            {tags?.length > 0 &&
-              tags.map((tag) => (
+            {tags?.length > 0
+              && tags.map(tag => (
                 <>
                   <span className="px-1">·</span>
                   <Link
@@ -52,7 +52,11 @@ export const PostCard = memo(
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>{comments} Comments</span>
+                <span>
+                  {comments}
+                  {" "}
+                  Comments
+                </span>
               </Link>
             </div>
           )}
@@ -67,19 +71,21 @@ export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, 
   let nextProps = {};
   if (prev && prev != 0) {
     prevProps.name = Link;
-    prevProps.className =
-      "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
+    prevProps.className
+      = "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
     prevProps.href = prev_link;
-  } else {
+  }
+  else {
     prevProps.name = "div";
     prevProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
   }
   if (next && next != 0 && next <= total) {
     nextProps.name = Link;
-    nextProps.className =
-      "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
+    nextProps.className
+      = "flex flex-row gap-2 rounded-lg border border-transparent hover:border-current p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white";
     nextProps.href = next_link;
-  } else {
+  }
+  else {
     nextProps.name = "div";
     nextProps.className = "flex flex-row gap-2 rounded-lg p-2 invisible";
   }
@@ -102,7 +108,10 @@ export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, 
           <span>Prev</span>
         </prevProps.name>
         <span className="p-2">
-          {current} / {total}
+          {current}
+          {" "}
+          /
+          {total}
         </span>
         <nextProps.name {...nextProps}>
           <span>Next</span>
@@ -137,7 +146,7 @@ const PostList = async ({ base, current = 1, posts }) => {
   return (
     <>
       <ul className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-2">
-        {currentPosts.map((post) => (
+        {currentPosts.map(post => (
           <li key={post.slug}>
             <PostCard
               title={post.title}

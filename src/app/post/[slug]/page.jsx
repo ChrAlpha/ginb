@@ -7,7 +7,7 @@ export const generateMetadata = async ({ params: { slug } }) => {
   const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     return {
-      title: `404 Not Found`,
+      title: "404 Not Found",
       openGraph: {
         title: `404 Not Found | ${sitename}`,
       },

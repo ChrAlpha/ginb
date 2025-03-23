@@ -6,7 +6,7 @@ export const Author = memo(() => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex h-min w-full flex-row items-center gap-4 md:flex-col">
-        <div className="w-24 flex-shrink-0 rounded-full md:w-2/3">
+        <div className="w-24 shrink-0 rounded-full md:w-2/3">
           <Image
             className="rounded-full"
             src={`https://github.com/${siteConfig.username}.png`}
@@ -24,7 +24,7 @@ export const Author = memo(() => {
       </div>
       {siteConfig.social && (
         <ul className="flex list-none flex-col gap-2 text-sm">
-          {Object.keys(siteConfig.social).map((key) => (
+          {Object.keys(siteConfig.social).map(key => (
             <li key={key}>
               <a
                 href={siteConfig.social[key]}

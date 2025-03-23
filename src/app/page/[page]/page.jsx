@@ -25,5 +25,5 @@ export default async function Page({ params: { page } }) {
     }
     return 0;
   });
-  return <PostList base={"/"} current={parseInt(page)} posts={posts} />;
+  return <PostList base="/" current={parseInt(page)} posts={posts} />;
 }
