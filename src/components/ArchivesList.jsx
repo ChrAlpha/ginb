@@ -12,7 +12,7 @@ const formatDate = (date) => {
 const ArchivesEntry = memo(({ title, date, path }) => {
   return (
     <li className="relative flex w-full flex-row border-l p-4">
-      <span className="absolute -left-[5.5px] top-5 my-auto h-2.5 w-2.5 rounded-full bg-[#eaeaea] dark:bg-[#333]"></span>
+      <span className="absolute -left-[5.5px] top-5 my-auto size-2.5 rounded-full bg-[#eaeaea] dark:bg-[#333]"></span>
       <span className="mr-2 shrink-0 text-sm tabular-nums text-black/60 dark:text-white/60">
         {formatDate(date)}
       </span>

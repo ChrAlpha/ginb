@@ -5,19 +5,15 @@ import tailwind from "eslint-plugin-tailwindcss";
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
-})
+});
 
 const config = [
   {
-    plugins: {
-      stylistic
-    },
-    rules: {
-      "stylistic/indent": ["warn", 2],
-      "stylistic/linebreak-style": ["warn", "unix"],
-      "stylistic/quotes": ["warn", "double"],
-      "stylistic/semi": ["warn", "always"],
-    }
+    ...stylistic.configs.customize({
+      indent: 2,
+      quotes: "double",
+      semi: true,
+    }),
   },
   ...fixupConfigRules(compat.config({
     extends: ["next"],
@@ -26,12 +22,12 @@ const config = [
     },
     overrides: [
       {
-        files: ["src/**/*.{js,jsx,ts,tsx}"],
-      }
-    ]
+        files: ["./src/**/*.{js,jsx,ts,tsx}"],
+      },
+    ],
   })),
   ...tailwind.configs["flat/recommended"],
-  { ignores: [".next/*", "out/*"] }
+  { ignores: [".next/*", "out/*"] },
 ];
 
 export default config;

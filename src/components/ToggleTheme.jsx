@@ -137,7 +137,7 @@ export const ToggleTheme = memo(({ responsive }) => {
         onClick={() => setIsToggleOpen(!isToggleOpen)}
       >
         <svg
-          className="m-auto h-6 w-6"
+          className="m-auto size-6"
           stroke="currentColor"
           fill="none"
           strokeWidth={2}
@@ -166,24 +166,24 @@ export const ToggleTheme = memo(({ responsive }) => {
           >
             {theme == "light"
               ? (
-                <svg
-                  className="my-auto h-4 w-6 px-1"
-                  fill="none"
-                  height="24"
-                  shapeRendering="geometricPrecision"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                </svg>
-              )
+                  <svg
+                    className="my-auto h-4 w-6 px-1"
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
+                  </svg>
+                )
               : (
-                <span className="w-6"></span>
-              )}
+                  <span className="w-6"></span>
+                )}
             <svg
               className="my-auto h-4 w-6 px-1"
               data-testid="geist-icon"
@@ -217,24 +217,24 @@ export const ToggleTheme = memo(({ responsive }) => {
           >
             {theme == "dark"
               ? (
-                <svg
-                  className="my-auto h-4 w-6 px-1"
-                  fill="none"
-                  height="24"
-                  shapeRendering="geometricPrecision"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                </svg>
-              )
+                  <svg
+                    className="my-auto h-4 w-6 px-1"
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
+                  </svg>
+                )
               : (
-                <span className="w-6"></span>
-              )}
+                  <span className="w-6"></span>
+                )}
             <svg
               className="my-auto h-4 w-6 px-1"
               data-testid="geist-icon"
@@ -260,24 +260,24 @@ export const ToggleTheme = memo(({ responsive }) => {
           >
             {theme != "light" && theme != "dark"
               ? (
-                <svg
-                  className="my-auto h-4 w-6 px-1"
-                  fill="none"
-                  height="24"
-                  shapeRendering="geometricPrecision"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                </svg>
-              )
+                  <svg
+                    className="my-auto h-4 w-6 px-1"
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
+                  </svg>
+                )
               : (
-                <span className="w-6"></span>
-              )}
+                  <span className="w-6"></span>
+                )}
             <svg
               className="my-auto h-4 w-6 px-1"
               data-testid="geist-icon"

@@ -56,7 +56,7 @@ const Header = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="h-6 w-6"
+                className="size-6"
               >
                 <path
                   fillRule="evenodd"

@@ -16,7 +16,7 @@ const formatDate = (date) => {
 export const PostCard = memo(
   async ({ title, created_at, summary, path, tags, html_url, comments }) => {
     return (
-      <div className="flex h-full w-full flex-col gap-4 rounded-lg border p-4">
+      <div className="flex size-full flex-col gap-4 rounded-lg border p-4">
         <h2 className="text-2xl">
           <Link href={"/" + path}>{title}</Link>
         </h2>
@@ -44,7 +44,7 @@ export const PostCard = memo(
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="my-auto h-4 w-4"
+                  className="my-auto size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -97,7 +97,7 @@ export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, 
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="h-5 w-5"
+            className="size-5"
           >
             <path
               fillRule="evenodd"
@@ -119,7 +119,7 @@ export const PageNav = memo(async ({ current, prev, prev_link, next, next_link, 
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="h-5 w-5"
+            className="size-5"
           >
             <path
               fillRule="evenodd"
