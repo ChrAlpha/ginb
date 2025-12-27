@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { blogInit } from "/src/utils/blogInit";
+import { blogInit } from "/src/lib/blog";
 import { slug } from "github-slugger";
 import { sitename } from "/_config";
 

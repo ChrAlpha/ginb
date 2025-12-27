@@ -1,5 +1,5 @@
 import { ArchivesList } from "/src/components/ArchivesList";
-import { getPostsByTag } from "/src/utils/blogInit";
+import { getPostsByTag } from "/src/lib/blog";
 import { notFound } from "next/navigation";
 import { sitename, keywords } from "/_config";
 

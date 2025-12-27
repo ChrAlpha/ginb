@@ -1,5 +1,5 @@
-import { ToggleTheme } from "../components/ToggleTheme";
-import Sidebar from "../components/Sidebar";
+import { ToggleTheme } from "../ToggleTheme";
+import Sidebar from "../Sidebar";
 import Link from "next/link";
 import { memo } from "react";
 import { sitename } from "/_config";

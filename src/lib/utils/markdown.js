@@ -1,7 +1,9 @@
-import { memo } from "react";
-import { footer } from "/_config";
-
-const parseMarkdownLinks = (text) => {
+/**
+ * Parse markdown-style links in text and convert to React elements
+ * @param {string} text - Text containing markdown links
+ * @returns {Array} Array of text and link elements
+ */
+export const parseMarkdownLinks = (text) => {
   const parts = [];
   let lastIndex = 0;
   const regex = /\[([^\]]+)]\(([^)]+)\)/g;
@@ -30,20 +32,3 @@ const parseMarkdownLinks = (text) => {
 
   return parts;
 };
-
-const Footer = async () => {
-  const rawFooter = `Copyright © ${new Date().getFullYear()}` + (footer ? ` | ${footer}` : "");
-  const parsedFooter = parseMarkdownLinks(rawFooter);
-
-  return (
-    <>
-      <footer className="mt-auto h-12 border-t p-4 text-xs text-black/60 dark:text-white/60">
-        <p className="container mx-auto w-full max-w-screen-xl">
-          {parsedFooter.map(part => part)}
-        </p>
-      </footer>
-    </>
-  );
-};
-
-export default memo(Footer);

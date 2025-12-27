@@ -1,5 +1,5 @@
-import { blogInit } from "/src/utils/blogInit";
-import { generateRssFeed } from "/src/utils/rssInit";
+import { blogInit } from "/src/lib/blog";
+import { generateRssFeed } from "/src/lib/rss";
 
 export async function GET() {
   const posts = await blogInit();

@@ -1,4 +1,4 @@
-import { blogInit } from "/src/utils/blogInit";
+import { blogInit } from "/src/lib/blog";
 import { ArchivesList } from "/src/components/ArchivesList";
 import { sitename } from "/_config";
 

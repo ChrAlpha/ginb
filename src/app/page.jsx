@@ -1,5 +1,5 @@
 import PostList from "/src/components/PostList";
-import { blogInit } from "/src/utils/blogInit";
+import { blogInit } from "/src/lib/blog";
 import { sitename, description } from "/_config";
 
 export const metadata = {

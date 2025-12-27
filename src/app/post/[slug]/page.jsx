@@ -1,5 +1,5 @@
 import PostContent from "/src/components/PostContent";
-import { getPostBySlug } from "/src/utils/blogInit";
+import { getPostBySlug } from "/src/lib/blog";
 import { notFound } from "next/navigation";
 import { sitename, keywords, username } from "/_config";
 

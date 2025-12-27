@@ -41,7 +41,7 @@ export const Author = memo(() => {
   );
 });
 
-const Left = () => {
+const AuthorCard = () => {
   return (
     <aside className="md:sticky md:top-16">
       <Author />
@@ -49,4 +49,4 @@ const Left = () => {
   );
 };
 
-export default memo(Left);
+export default memo(AuthorCard);

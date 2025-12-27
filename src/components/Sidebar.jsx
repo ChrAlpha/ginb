@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, memo } from "react";
-import { NavBar } from "../app/header";
+import { NavBar } from "./layout/Header";
 import { sitename } from "/_config";
 
 const Sidebar = () => {

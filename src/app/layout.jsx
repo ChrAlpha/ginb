@@ -1,11 +1,9 @@
-import Header from "./header";
-import Footer from "./footer";
-import Left from "/src/components/Left";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import AuthorCard from "/src/components/AuthorCard";
 import { ThemeProviders } from "../components/ToggleTheme";
 import "./globals.css";
 import { sitename, username, description, keywords, url, favicon } from "/_config";
-
-export const runtime = "edge";
 
 export const metadata = {
   metadataBase: new URL(url),
@@ -68,7 +66,7 @@ export default function RootLayout({ children }) {
             </div>
             <div className="md:order-first md:basis-64 lg:basis-72">
               <hr className="mx-auto my-12 w-2/3 md:hidden" />
-              <Left />
+              <AuthorCard />
             </div>
           </div>
           <Footer />
