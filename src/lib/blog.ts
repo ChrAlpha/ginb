@@ -1,7 +1,7 @@
 import { Octokit } from "octokit";
 import { cacheLife, cacheTag } from "next/cache";
 import { slug as slugger } from "github-slugger";
-import { username, repository } from "/_config";
+import { github } from "/_config";
 import type { Post } from "/src/types";
 
 interface GitHubIssue {
@@ -43,9 +43,9 @@ export async function blogInit(): Promise<Post[]> {
     auth: process.env.GITHUB_TOKEN,
   });
   const issues = await octokit.paginate(octokit.rest.issues.listForRepo, {
-    owner: username,
-    repo: repository,
-    creator: username,
+    owner: github.owner,
+    repo: github.repo,
+    creator: github.owner,
     per_page: 100,
   }) as GitHubIssue[];
 

@@ -1,7 +1,7 @@
 import { ArchivesList } from "/src/components/ArchivesList";
 import { getPostsByTag } from "/src/lib/blog";
 import { notFound } from "next/navigation";
-import { sitename, keywords } from "/_config";
+import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
@@ -16,7 +16,7 @@ export const generateMetadata = async ({ params }: TagPageProps): Promise<Metada
     return {
       title: "404 Not Found",
       openGraph: {
-        title: `404 Not Found | ${sitename}`,
+        title: `404 Not Found | ${site.title}`,
       },
       robots: {
         index: false,
@@ -25,11 +25,11 @@ export const generateMetadata = async ({ params }: TagPageProps): Promise<Metada
   }
   return {
     title: `Tag: ${decodeURIComponent(tag)}`,
-    description: `All posts including ${decodeURIComponent(tag)} tag in ${sitename}.`,
-    keywords: [decodeURIComponent(tag)].concat(keywords),
+    description: `All posts including ${decodeURIComponent(tag)} tag in ${site.title}.`,
+    keywords: [decodeURIComponent(tag)].concat(site.keywords),
     openGraph: {
-      title: `Tag: ${decodeURIComponent(tag)} | ${sitename}`,
-      description: `All posts including ${decodeURIComponent(tag)} tag in ${sitename}.`,
+      title: `Tag: ${decodeURIComponent(tag)} | ${site.title}`,
+      description: `All posts including ${decodeURIComponent(tag)} tag in ${site.title}.`,
     },
   };
 };

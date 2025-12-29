@@ -1,19 +1,19 @@
 import { Feed } from "feed";
 import { cache } from "react";
-import { sitename, username, description, url } from "/_config";
+import { site, github, url } from "/_config";
 import type { Post } from "/src/types";
 
 export const generateRssFeed = cache((posts: Post[]): string => {
   const feed = new Feed({
-    title: sitename,
-    description: description,
+    title: site.title,
+    description: site.description,
     id: url,
     link: url,
     feedLinks: {
       rss2: `${url}/feed`,
     },
     author: {
-      name: username,
+      name: github.owner,
     },
     copyright: "",
   });

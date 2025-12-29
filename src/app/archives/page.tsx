@@ -1,16 +1,16 @@
 import { blogInit } from "/src/lib/blog";
 import { ArchivesList } from "/src/components/ArchivesList";
-import { sitename } from "/_config";
+import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Archives",
-  description: `Archive all posts in ${sitename}.`,
+  description: `Archive all posts in ${site.title}.`,
   openGraph: {
-    title: `Archives | ${sitename}`,
-    description: `Archive all posts in ${sitename}.`,
-    siteName: sitename,
+    title: `Archives | ${site.title}`,
+    description: `Archive all posts in ${site.title}.`,
+    siteName: site.title,
     url: "/",
     type: "website",
   },

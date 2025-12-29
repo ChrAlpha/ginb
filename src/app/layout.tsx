@@ -3,27 +3,27 @@ import Footer from "../components/layout/Footer";
 import AuthorCard from "/src/components/AuthorCard";
 import { ThemeProviders } from "../components/ToggleTheme";
 import "./globals.css";
-import { sitename, username, description, keywords, url, favicon } from "/_config";
+import { site, github, url } from "/_config";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
   title: {
-    template: `%s | ${sitename}`,
-    default: sitename,
+    template: `%s | ${site.title}`,
+    default: site.title,
   },
-  description: description,
-  keywords: keywords,
-  authors: [{ name: username }],
+  description: site.description,
+  keywords: site.keywords,
+  authors: [{ name: github.owner }],
   openGraph: {
-    title: sitename,
-    description: description,
-    siteName: sitename,
+    title: site.title,
+    description: site.description,
+    siteName: site.title,
     url: "/",
     images: [
       {
-        url: favicon,
+        url: site.favicon,
       },
     ],
     type: "website",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     ],
   },
   appleWebApp: {
-    title: sitename,
+    title: site.title,
     statusBarStyle: "black-translucent",
   },
 };

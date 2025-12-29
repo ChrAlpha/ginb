@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { blogInit } from "/src/lib/blog";
 import { slug } from "github-slugger";
-import { sitename } from "/_config";
+import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tags",
-  description: `All tags in posts of ${sitename}.`,
+  description: `All tags in posts of ${site.title}.`,
   openGraph: {
-    title: `Tags | ${sitename}`,
-    description: `All tags in posts of ${sitename}.`,
-    siteName: sitename,
+    title: `Tags | ${site.title}`,
+    description: `All tags in posts of ${site.title}.`,
+    siteName: site.title,
     url: "/",
     type: "website",
   },

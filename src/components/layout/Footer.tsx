@@ -3,7 +3,7 @@ import { footer } from "/_config";
 import { parseMarkdownLinks } from "/src/lib/utils/markdown";
 
 const Footer = async () => {
-  const rawFooter = `Copyright © ${new Date().getFullYear()}` + (footer ? ` | ${footer}` : "");
+  const rawFooter = `Copyright © ${new Date().getFullYear()}` + (footer.content ? ` | ${footer.content}` : "");
   const parsedFooter = parseMarkdownLinks(rawFooter);
 
   return (

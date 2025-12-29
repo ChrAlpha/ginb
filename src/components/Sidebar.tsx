@@ -2,7 +2,7 @@
 
 import { useState, memo } from "react";
 import { NavBar } from "./layout/Header";
-import { sitename } from "/_config";
+import { site } from "/_config";
 import { useMounted } from "@/lib/hooks/useMounted";
 
 const Sidebar = () => {
@@ -24,7 +24,7 @@ const Sidebar = () => {
           >
             <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"></path>
           </svg>
-          <h2 className="inline text-xl">{sitename}</h2>
+          <h2 className="inline text-xl">{site.title}</h2>
         </summary>
         <NavBar responsive="flex md:hidden" />
       </details>
@@ -36,7 +36,7 @@ const Sidebar = () => {
       <button
         className="flex flex-row py-2.5 md:hidden"
         id="toggleSidebarButton"
-        aria-label={sitename}
+        aria-label={site.title}
         onClick={toggleSidebar}
       >
         {isSidebarOpen
@@ -58,7 +58,7 @@ const Sidebar = () => {
                 <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"></path>
               </svg>
             )}
-        <h2 className="inline text-xl">{sitename}</h2>
+        <h2 className="inline text-xl">{site.title}</h2>
       </button>
       {isSidebarOpen && (
         <div className="fixed right-0 top-12 z-40 flex size-full flex-col gap-4 bg-white p-4 dark:bg-black md:hidden">

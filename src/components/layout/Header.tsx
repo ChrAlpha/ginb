@@ -2,7 +2,7 @@ import { ToggleTheme } from "../ToggleTheme";
 import Sidebar from "../Sidebar";
 import Link from "next/link";
 import { memo } from "react";
-import { sitename } from "/_config";
+import { site } from "/_config";
 
 interface NavBarProps {
   responsive: string;
@@ -14,7 +14,7 @@ export const NavBar = memo(({ responsive, click = false }: NavBarProps) => {
     <>
       <nav className={responsive + " flex-col gap-6 md:flex-row"}>
         <Link className="my-auto hidden md:block" href="/">
-          <h2 className="inline text-xl">{sitename}</h2>
+          <h2 className="inline text-xl">{site.title}</h2>
         </Link>
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"

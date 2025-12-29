@@ -1,15 +1,15 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/lib/blog";
-import { sitename, description } from "/_config";
+import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | " + sitename,
+  title: "Home | " + site.title,
   openGraph: {
-    title: "Home | " + sitename,
-    description: description,
-    siteName: sitename,
+    title: "Home | " + site.title,
+    description: site.description,
+    siteName: site.title,
     url: "/",
     type: "website",
   },

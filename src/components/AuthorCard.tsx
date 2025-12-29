@@ -1,5 +1,5 @@
 import { memo } from "react";
-import siteConfig from "/_config";
+import { site, github, social } from "/_config";
 import Image from "next/image";
 
 export const Author = memo(() => {
@@ -9,29 +9,29 @@ export const Author = memo(() => {
         <div className="w-24 shrink-0 rounded-full md:w-2/3">
           <Image
             className="rounded-full"
-            src={`https://github.com/${siteConfig.username}.png`}
+            src={`https://github.com/${github.owner}.png`}
             width={192}
             height={192}
             alt="Avatar"
           />
         </div>
         <div>
-          <h2 className="w-full font-light">{siteConfig.username}</h2>
+          <h2 className="w-full font-light">{github.owner}</h2>
           <div className="w-full flex-initial text-sm text-black/60 dark:text-white/60">
-            {siteConfig.description}
+            {site.description}
           </div>
         </div>
       </div>
-      {siteConfig.social && Object.keys(siteConfig.social).length > 0 && (
+      {social && social.length > 0 && (
         <ul className="flex list-none flex-col gap-2 text-sm">
-          {Object.keys(siteConfig.social).map(key => (
-            <li key={key}>
+          {social.map(link => (
+            <li key={link.name}>
               <a
-                href={siteConfig.social[key]}
+                href={link.url}
                 target="_blank"
                 className="text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
               >
-                {key}
+                {link.name}
               </a>
             </li>
           ))}

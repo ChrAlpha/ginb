@@ -1,7 +1,7 @@
 import PostContent from "/src/components/PostContent";
 import { getPostBySlug } from "/src/lib/blog";
 import { notFound } from "next/navigation";
-import { sitename, keywords, username } from "/_config";
+import { site, github } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
@@ -16,7 +16,7 @@ export const generateMetadata = async ({ params }: PostPageProps): Promise<Metad
     return {
       title: "404 Not Found",
       openGraph: {
-        title: `404 Not Found | ${sitename}`,
+        title: `404 Not Found | ${site.title}`,
       },
       robots: {
         index: false,
@@ -25,15 +25,15 @@ export const generateMetadata = async ({ params }: PostPageProps): Promise<Metad
   }
   return {
     title: `${post.title}`,
-    keywords: post.tags.concat(keywords),
+    keywords: post.tags.concat(site.keywords),
     description: post.contentRaw.slice(0, 150),
     openGraph: {
-      title: `${post.title} | ${sitename}`,
+      title: `${post.title} | ${site.title}`,
       description: post.contentRaw.slice(0, 150),
-      siteName: sitename,
+      siteName: site.title,
       url: "/",
       type: "article",
-      authors: [username],
+      authors: [github.owner],
       tags: post.tags,
     },
   };

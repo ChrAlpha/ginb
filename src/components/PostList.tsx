@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { slug } from "github-slugger";
 import { memo } from "react";
-import { post_per_page } from "/_config";
+import { pagination } from "/_config";
 import { notFound } from "next/navigation";
 import type { Post } from "/src/types";
 
@@ -185,10 +185,11 @@ interface PostListProps {
 
 const PostList = async ({ base, current = 1, posts }: PostListProps) => {
   const pageNumber = current;
-  const currentPosts = posts.slice(post_per_page * (pageNumber - 1), post_per_page * pageNumber);
-  const pagination = {
+  const postsPerPage = pagination.postsPerPage;
+  const currentPosts = posts.slice(postsPerPage * (pageNumber - 1), postsPerPage * pageNumber);
+  const paginationState = {
     currentPage: pageNumber,
-    totalPages: Math.max(Math.ceil(posts.length / post_per_page), 1),
+    totalPages: Math.max(Math.ceil(posts.length / postsPerPage), 1),
   };
   if (currentPosts.length === 0) {
     return notFound();
@@ -211,14 +212,14 @@ const PostList = async ({ base, current = 1, posts }: PostListProps) => {
         ))}
       </ul>
       <PageNav
-        current={pagination.currentPage}
-        prev={pagination.currentPage - 1}
+        current={paginationState.currentPage}
+        prev={paginationState.currentPage - 1}
         prev_link={
-          pagination.currentPage - 1 > 1 ? `${base}page/${pagination.currentPage - 1}` : base
+          paginationState.currentPage - 1 > 1 ? `${base}page/${paginationState.currentPage - 1}` : base
         }
-        next={pagination.currentPage + 1}
-        next_link={`${base}page/${pagination.currentPage + 1}`}
-        total={pagination.totalPages}
+        next={paginationState.currentPage + 1}
+        next_link={`${base}page/${paginationState.currentPage + 1}`}
+        total={paginationState.totalPages}
       />
     </>
   );

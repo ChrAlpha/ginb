@@ -1,6 +1,6 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/lib/blog";
-import { sitename, description } from "/_config";
+import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
 
@@ -13,9 +13,9 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
   return {
     title: `Page ${page}`,
     openGraph: {
-      title: `Page ${page} | ${sitename}`,
-      description: description,
-      siteName: sitename,
+      title: `Page ${page} | ${site.title}`,
+      description: site.description,
+      siteName: site.title,
       url: "/",
       type: "website",
     },
