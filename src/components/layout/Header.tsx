@@ -13,25 +13,43 @@ export const NavBar = memo(({ responsive, click = false }: NavBarProps) => {
   return (
     <>
       <nav className={responsive + " flex-col gap-6 md:flex-row"}>
-        <Link className="my-auto hidden md:block" href="/">
+        <Link
+          className={`
+            my-auto hidden
+            md:block
+          `}
+          href="/"
+        >
           <h2 className="inline text-xl">{site.title}</h2>
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
+          className={`
+            my-auto p-2 text-black/60
+            hover:text-black
+            dark:text-white/60 dark:hover:text-white
+          `}
           href="/"
           onClick={click || undefined}
         >
           Home
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
+          className={`
+            my-auto p-2 text-black/60
+            hover:text-black
+            dark:text-white/60 dark:hover:text-white
+          `}
           href="/archives/"
           onClick={click || undefined}
         >
           Archives
         </Link>
         <Link
-          className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
+          className={`
+            my-auto p-2 text-black/60
+            hover:text-black
+            dark:text-white/60 dark:hover:text-white
+          `}
           href="/tags/"
           onClick={click || undefined}
         >
@@ -45,14 +63,30 @@ export const NavBar = memo(({ responsive, click = false }: NavBarProps) => {
 const Header = () => {
   return (
     <>
-      <header className="sticky top-0 z-50 order-first flex min-h-12 w-full items-stretch border-b bg-white dark:bg-black md:bg-white/90 md:backdrop-blur-sm md:dark:bg-black/80">
-        <div className="container mx-auto flex w-full max-w-screen-xl items-stretch justify-between px-4">
+      <header className={`
+        sticky top-0 z-50 order-first flex min-h-12 w-full items-stretch
+        border-b bg-white
+        md:bg-white/90 md:backdrop-blur-sm
+        dark:bg-black
+        md:dark:bg-black/80
+      `}
+      >
+        <div className={`
+          container mx-auto flex w-full max-w-screen-xl items-stretch
+          justify-between px-4
+        `}
+        >
           <Sidebar />
           <NavBar responsive="hidden md:flex" />
           <div className="relative flex flex-row items-center gap-4">
             <ToggleTheme />
             <a
-              className="text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
+              className={`
+                text-[#666]
+                hover:text-black
+                focus:outline-none
+                dark:text-[#888] dark:hover:text-white
+              `}
               target="_blank"
               href="/rss"
               aria-label="RSS feed of this site"

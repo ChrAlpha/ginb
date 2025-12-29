@@ -31,13 +31,36 @@ interface PostContentProps {
 
 const PostContent = async ({ title, created_at, contentRaw, tags, comments, html_url }: PostContentProps) => {
   return (
-    <article className="mt-8 rounded-lg border md:mt-0">
+    <article className={`
+      mt-8 rounded-lg border
+      md:mt-0
+    `}
+    >
       <div className="p-4">
         <h1 className="text-2xl">{title}</h1>
-        <div className="mt-4 text-sm text-black/60 dark:text-white/60">
+        <div className={`
+          mt-4 text-sm text-black/60
+          dark:text-white/60
+        `}
+        >
           <span>{formatDate(created_at)}</span>
         </div>
-        <div className="prose mt-4 max-w-none dark:prose-invert prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-black/60 prose-code:rounded-md prose-code:bg-gray-300/30 prose-code:px-1 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:-mx-4 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:bg-transparent prose-pre:p-0 prose-table:overflow-x-auto dark:prose-blockquote:text-white/60">
+        <div className={`
+          prose mt-4 max-w-none
+          dark:prose-invert
+          prose-a:text-blue-600 prose-a:no-underline
+          hover:prose-a:underline
+          prose-blockquote:font-normal prose-blockquote:text-black/60
+          prose-blockquote:not-italic
+          dark:prose-blockquote:text-white/60
+          prose-code:rounded-md prose-code:bg-gray-300/30 prose-code:px-1
+          prose-code:py-0.5 prose-code:font-normal
+          prose-code:before:content-none prose-code:after:content-none
+          prose-pre:-mx-4 prose-pre:overflow-x-auto prose-pre:rounded-none
+          prose-pre:bg-transparent prose-pre:p-0
+          prose-table:overflow-x-auto
+        `}
+        >
           <style>
             {`
             .katex-display {
@@ -91,7 +114,12 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
           {tags.map(tag => (
             <Link
               key={slugger(tag)}
-              className="text-black/60 before:content-['#'] hover:underline dark:text-white/60"
+              className={`
+                text-black/60
+                before:content-['#']
+                hover:underline
+                dark:text-white/60
+              `}
               href={"/tags/" + slugger(tag)}
             >
               {tag}
@@ -100,7 +128,12 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
         </div>
         {comments > 0
           ? (
-              <div className="text-black/60 hover:underline dark:text-white/60">
+              <div className={`
+                text-black/60
+                hover:underline
+                dark:text-white/60
+              `}
+              >
                 <Link className="flex flex-row" href={html_url} target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +156,12 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
               </div>
             )
           : (
-              <div className="text-black/60 hover:underline dark:text-white/60">
+              <div className={`
+                text-black/60
+                hover:underline
+                dark:text-white/60
+              `}
+              >
                 <Link className="flex flex-row" href={html_url} target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

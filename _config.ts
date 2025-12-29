@@ -24,13 +24,14 @@ function parseSocialEnv(value: string | undefined, fallback: SocialLink[]): Soci
     if (Array.isArray(parsed)) {
       return parsed.filter(
         (item): item is SocialLink =>
-          typeof item === "object" &&
-          item !== null &&
-          typeof item.name === "string" &&
-          typeof item.url === "string"
+          typeof item === "object"
+          && item !== null
+          && typeof item.name === "string"
+          && typeof item.url === "string",
       );
     }
-  } catch {
+  }
+  catch {
     console.warn("[config] Failed to parse SITE_SOCIAL environment variable");
   }
   return fallback;

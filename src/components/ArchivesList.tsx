@@ -19,8 +19,17 @@ interface ArchivesEntryProps {
 const ArchivesEntry = memo(({ title, date, path }: ArchivesEntryProps) => {
   return (
     <li className="relative flex w-full flex-row border-l p-4">
-      <span className="absolute -left-[5.5px] top-5 my-auto size-2.5 rounded-full bg-[#eaeaea] dark:bg-[#333]"></span>
-      <span className="mr-2 shrink-0 text-sm tabular-nums text-black/60 dark:text-white/60">
+      <span className={`
+        absolute top-5 -left-[5.5px] my-auto size-2.5 rounded-full bg-[#eaeaea]
+        dark:bg-[#333]
+      `}
+      >
+      </span>
+      <span className={`
+        mr-2 shrink-0 text-sm text-black/60 tabular-nums
+        dark:text-white/60
+      `}
+      >
         {formatDate(date)}
       </span>
       <Link className="hover:underline" href={path}>

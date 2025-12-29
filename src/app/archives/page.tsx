@@ -27,7 +27,11 @@ export default async function Archives() {
     <>
       <div className="w-full p-4">
         <h1 className="text-3xl font-semibold">Archives</h1>
-        <span className="text-black/60 dark:text-white/60">
+        <span className={`
+          text-black/60
+          dark:text-white/60
+        `}
+        >
           {posts.length}
           {" "}
           Posts in total

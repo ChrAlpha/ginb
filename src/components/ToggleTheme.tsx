@@ -171,12 +171,19 @@ export const ToggleTheme = memo(({ responsive }: ToggleThemeProps) => {
       <div className={(isToggleOpen ? "absolute" : "hidden") + " right-0 top-12"}>
         <div
           id="toggle-theme-menu"
-          className="mt-1 box-content block min-w-min rounded-lg border bg-white p-2 dark:bg-black"
+          className={`
+            mt-1 box-content block min-w-min rounded-lg border bg-white p-2
+            dark:bg-black
+          `}
         >
           <button
             id="toggle-theme-light-button"
             aria-label="Always Light"
-            className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
+            className={`
+              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
+              hover:bg-black/10
+              dark:text-white/60 dark:hover:bg-white/20
+            `}
             onClick={() => setTheme("light")}
           >
             {theme == "light"
@@ -227,7 +234,11 @@ export const ToggleTheme = memo(({ responsive }: ToggleThemeProps) => {
           <button
             id="toggle-theme-dark-button"
             aria-label="Always Dark"
-            className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
+            className={`
+              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
+              hover:bg-black/10
+              dark:text-white/60 dark:hover:bg-white/20
+            `}
             onClick={() => setTheme("dark")}
           >
             {theme == "dark"
@@ -270,7 +281,11 @@ export const ToggleTheme = memo(({ responsive }: ToggleThemeProps) => {
           <button
             id="toggle-theme-system-button"
             aria-label="Follow System"
-            className="mx-auto flex w-full flex-row rounded-lg p-2 text-black/60 hover:bg-black/10 dark:text-white/60 dark:hover:bg-white/20"
+            className={`
+              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
+              hover:bg-black/10
+              dark:text-white/60 dark:hover:bg-white/20
+            `}
             onClick={() => setTheme("system")}
           >
             {theme != "light" && theme != "dark"

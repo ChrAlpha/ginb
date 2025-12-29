@@ -45,7 +45,11 @@ export default async function Tags() {
           <Link key={tag} href={"/tags/" + slug(tag)}>
             <div className="flex w-full justify-between rounded-lg border p-4">
               <span>{tag}</span>
-              <span className="my-auto block text-sm text-black/60 dark:text-white/60">
+              <span className={`
+                my-auto block text-sm text-black/60
+                dark:text-white/60
+              `}
+              >
                 {allTagsWithCount[tag]}
                 {" "}
                 Posts

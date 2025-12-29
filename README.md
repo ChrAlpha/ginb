@@ -100,7 +100,6 @@ All kinds of contributions are welcomed, including but not limited to theme opti
 - GitHub flavored markdown support: [remark-gfm](https://github.com/remarkjs/remark-gfm)
 - LaTeX support: [remark-math](https://github.com/remarkjs/remark-math) and [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex)
 - Code linter: [ESLint](https://eslint.org/)
-- Code formatter: [Prettier](https://prettier.io/)
 - Commit hook: [Husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/lint-staged/lint-staged)
 
 ## License

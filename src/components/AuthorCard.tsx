@@ -5,8 +5,16 @@ import Image from "next/image";
 export const Author = memo(() => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex h-min w-full flex-row items-center gap-4 md:flex-col">
-        <div className="w-24 shrink-0 rounded-full md:w-2/3">
+      <div className={`
+        flex h-min w-full flex-row items-center gap-4
+        md:flex-col
+      `}
+      >
+        <div className={`
+          w-24 shrink-0 rounded-full
+          md:w-2/3
+        `}
+        >
           <Image
             className="rounded-full"
             src={`https://github.com/${github.owner}.png`}
@@ -17,7 +25,11 @@ export const Author = memo(() => {
         </div>
         <div>
           <h2 className="w-full font-light">{github.owner}</h2>
-          <div className="w-full flex-initial text-sm text-black/60 dark:text-white/60">
+          <div className={`
+            w-full flex-initial text-sm text-black/60
+            dark:text-white/60
+          `}
+          >
             {site.description}
           </div>
         </div>
@@ -29,7 +41,11 @@ export const Author = memo(() => {
               <a
                 href={link.url}
                 target="_blank"
-                className="text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
+                className={`
+                  text-black/60
+                  hover:text-black
+                  dark:text-white/60 dark:hover:text-white
+                `}
               >
                 {link.name}
               </a>

@@ -31,16 +31,29 @@ export const PostCard = memo(
         <h2 className="text-2xl">
           <Link href={"/" + path}>{title}</Link>
         </h2>
-        <p className="flex-1 text-black/60 dark:text-white/60">{summary}</p>
+        <p className={`
+          flex-1 text-black/60
+          dark:text-white/60
+        `}
+        >
+          {summary}
+        </p>
         <div className="flex justify-between">
-          <div className="text-sm text-black/60 dark:text-white/60">
+          <div className={`
+            text-sm text-black/60
+            dark:text-white/60
+          `}
+          >
             <span>{formatDate(created_at)}</span>
             {tags?.length > 0
               && tags.map(tag => (
                 <span key={tag}>
                   <span className="px-1">·</span>
                   <Link
-                    className="hover:text-black dark:hover:text-white"
+                    className={`
+                      hover:text-black
+                      dark:hover:text-white
+                    `}
                     href={"/tags/" + slug(tag)}
                   >
                     {tag}
@@ -49,7 +62,12 @@ export const PostCard = memo(
               ))}
           </div>
           {comments > 0 && (
-            <div className="text-sm text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white">
+            <div className={`
+              text-sm text-black/60
+              hover:text-black
+              dark:text-white/60 dark:hover:text-white
+            `}
+            >
               <Link className="flex flex-row" href={html_url} target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +214,11 @@ const PostList = async ({ base, current = 1, posts }: PostListProps) => {
   }
   return (
     <>
-      <ul className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-2">
+      <ul className={`
+        grid auto-rows-min grid-cols-1 gap-4
+        lg:grid-cols-2
+      `}
+      >
         {currentPosts.map(post => (
           <li key={post.slug}>
             <PostCard

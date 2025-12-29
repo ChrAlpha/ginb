@@ -15,7 +15,12 @@ const Sidebar = () => {
 
   if (!mounted) {
     return (
-      <details className="z-40 flex flex-col gap-4 bg-white py-2.5 dark:bg-black md:hidden">
+      <details className={`
+        z-40 flex flex-col gap-4 bg-white py-2.5
+        md:hidden
+        dark:bg-black
+      `}
+      >
         <summary className="flex list-none flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +39,10 @@ const Sidebar = () => {
   return (
     <>
       <button
-        className="flex flex-row py-2.5 md:hidden"
+        className={`
+          flex flex-row py-2.5
+          md:hidden
+        `}
         id="toggleSidebarButton"
         aria-label={site.title}
         onClick={toggleSidebar}
@@ -61,7 +69,12 @@ const Sidebar = () => {
         <h2 className="inline text-xl">{site.title}</h2>
       </button>
       {isSidebarOpen && (
-        <div className="fixed right-0 top-12 z-40 flex size-full flex-col gap-4 bg-white p-4 dark:bg-black md:hidden">
+        <div className={`
+          fixed top-12 right-0 z-40 flex size-full flex-col gap-4 bg-white p-4
+          md:hidden
+          dark:bg-black
+        `}
+        >
           <NavBar responsive="flex md:hidden" click={toggleSidebar} />
         </div>
       )}
