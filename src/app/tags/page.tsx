@@ -2,8 +2,10 @@ import Link from "next/link";
 import { blogInit } from "/src/lib/blog";
 import { slug } from "github-slugger";
 import { sitename } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Tags",
   description: `All tags in posts of ${sitename}.`,
   openGraph: {
@@ -16,8 +18,12 @@ export const metadata = {
 };
 
 export default async function Tags() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("tags-page");
+
   const posts = await blogInit();
-  const allTagsWithCount = {};
+  const allTagsWithCount: Record<string, number> = {};
   posts.forEach((post) => {
     post.tags.forEach((tag) => {
       if (allTagsWithCount[tag]) {

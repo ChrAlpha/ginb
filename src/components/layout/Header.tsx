@@ -4,7 +4,12 @@ import Link from "next/link";
 import { memo } from "react";
 import { sitename } from "/_config";
 
-export const NavBar = memo(({ responsive, click = false }) => {
+interface NavBarProps {
+  responsive: string;
+  click?: (() => void) | false;
+}
+
+export const NavBar = memo(({ responsive, click = false }: NavBarProps) => {
   return (
     <>
       <nav className={responsive + " flex-col gap-6 md:flex-row"}>
@@ -14,21 +19,21 @@ export const NavBar = memo(({ responsive, click = false }) => {
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/"
-          onClick={click}
+          onClick={click || undefined}
         >
           Home
         </Link>
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/archives/"
-          onClick={click}
+          onClick={click || undefined}
         >
           Archives
         </Link>
         <Link
           className="my-auto p-2 text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
           href="/tags/"
-          onClick={click}
+          onClick={click || undefined}
         >
           Tags
         </Link>
@@ -40,7 +45,7 @@ export const NavBar = memo(({ responsive, click = false }) => {
 const Header = () => {
   return (
     <>
-      <header className="sticky top-0 z-50 order-first flex min-h-header w-full items-stretch border-b bg-white dark:bg-black md:bg-white/90 md:backdrop-blur-sm md:dark:bg-black/80">
+      <header className="sticky top-0 z-50 order-first flex min-h-12 w-full items-stretch border-b bg-white dark:bg-black md:bg-white/90 md:backdrop-blur-sm md:dark:bg-black/80">
         <div className="container mx-auto flex w-full max-w-screen-xl items-stretch justify-between px-4">
           <Sidebar />
           <NavBar responsive="hidden md:flex" />
@@ -48,7 +53,7 @@ const Header = () => {
             <ToggleTheme />
             <a
               className="text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
-              _target="blank"
+              target="_blank"
               href="/rss"
               aria-label="RSS feed of this site"
             >

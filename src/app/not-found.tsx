@@ -5,7 +5,7 @@ function NotFound() {
   return (
     <div className="m-auto">
       <h1 className="text-center text-2xl">404 Page Not Found</h1>
-      <p className="mx-auto mt-8 max-w-main text-center">
+      <p className="mx-auto mt-8 max-w-[720px] text-center">
         Maybe this link is broken.
         {" "}
         <Link className="text-blue-600 hover:underline" href="/">

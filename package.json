@@ -1,6 +1,7 @@
 {
   "name": "ginb",
   "version": "0.0.1",
+  "type": "module",
   "description": "Write & Share all in GitHub",
   "main": "./readme.md",
   "scripts": {
@@ -30,13 +31,13 @@
   },
   "homepage": "https://github.com/chralpha/ginb#readme",
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.23",
-    "bcrypt": "^5.1.1",
-    "feed": "^4.2.2",
+    "bcrypt": "^6.0.0",
+    "feed": "^5.1.0",
     "github-slugger": "^2.0.0",
-    "next": "^15.5.9",
-    "octokit": "^4.1.4",
+    "katex": "^0.16.27",
+    "next": "^16.1.1",
+    "octokit": "^5.0.5",
     "postcss": "^8.5.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -46,21 +47,27 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.1",
+    "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3.3.3",
-    "@next/eslint-plugin-next": "^15.5.9",
-    "@stylistic/eslint-plugin": "^4.4.1",
-    "dotenv": "^16.6.1",
+    "@next/eslint-plugin-next": "^16.1.1",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^15.5.9",
+    "eslint-config-next": "^16.1.1",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-tailwindcss": "^3.18.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.2"
+    "lint-staged": "^16.2.7",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.50.1"
   },
   "engines": {
     "node": ">=22"

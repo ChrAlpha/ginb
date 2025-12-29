@@ -2,8 +2,15 @@ import PostContent from "/src/components/PostContent";
 import { getPostBySlug } from "/src/lib/blog";
 import { notFound } from "next/navigation";
 import { sitename, keywords, username } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const generateMetadata = async ({ params: { slug } }) => {
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export const generateMetadata = async ({ params }: PostPageProps): Promise<Metadata> => {
+  const { slug } = await params;
   const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     return {
@@ -32,7 +39,12 @@ export const generateMetadata = async ({ params: { slug } }) => {
   };
 };
 
-export default async function PostPage({ params: { slug } }) {
+export default async function PostPage({ params }: PostPageProps) {
+  "use cache";
+  const { slug } = await params;
+  cacheLife("hours");
+  cacheTag("blog-posts", `post-${slug}`);
+
   const post = await getPostBySlug(decodeURIComponent(slug));
   if (!post) {
     // 404 Not Found
@@ -43,11 +55,8 @@ export default async function PostPage({ params: { slug } }) {
     <PostContent
       title={post.title}
       created_at={post.created_at}
-      updated_at={post.updated_at}
       contentRaw={post.contentRaw}
       tags={post.tags}
-      slug={post.slug}
-      path={post.path}
       comments={post.comments}
       html_url={post.html_url}
     />

@@ -1,20 +1,32 @@
 "use client";
 
-import { useState, useEffect, useContext, createContext, useCallback, memo } from "react";
+import { useState, useEffect, useContext, createContext, useCallback, memo, type ReactNode } from "react";
+import type { Theme, ThemeContextType } from "/src/types";
+import { useMounted } from "@/lib/hooks/useMounted";
 
-const ThemeContext = createContext();
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+};
 
-export const ThemeProviders = memo(({ children }) => {
-  const [theme, setTheme] = useState(() => {
+interface ThemeProvidersProps {
+  children: ReactNode;
+}
+
+export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
+  const [theme, setTheme] = useState<Theme | undefined>(() => {
     if (typeof window === "undefined") {
       return undefined;
     }
-    const localTheme = localStorage.getItem("user-color-scheme");
+    const localTheme = localStorage.getItem("user-color-scheme") as Theme | null;
     return localTheme || "system";
   });
-  const [colorScheme, setColorScheme] = useState(() => {
+  const [colorScheme, setColorScheme] = useState<"light" | "dark" | undefined>(() => {
     if (typeof window === "undefined") {
       return undefined;
     }
@@ -28,7 +40,7 @@ export const ThemeProviders = memo(({ children }) => {
 
   // 添加事件监听器以响应系统颜色方案更改
   const handleColorSchemeChange = useCallback(
-    (event) => {
+    (event?: MediaQueryListEvent | MediaQueryList) => {
       if (!event) {
         event = window.matchMedia("(prefers-color-scheme: dark)");
       }
@@ -94,14 +106,19 @@ export const ThemeProviders = memo(({ children }) => {
   );
 });
 
-export const ToggleTheme = memo(({ responsive }) => {
-  const [mounted, setMounted] = useState(false);
+interface ToggleThemeProps {
+  responsive?: string;
+}
+
+export const ToggleTheme = memo(({ responsive }: ToggleThemeProps) => {
+  const mounted = useMounted();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
   const handleClickOutside = useCallback(
-    (e) => {
-      if (e.target.closest("#toggle-theme-button") || e.target.closest("#toggle-theme-menu")) {
+    (e: MouseEvent) => {
+      const target = e.target as Element;
+      if (target.closest("#toggle-theme-button") || target.closest("#toggle-theme-menu")) {
         return;
       }
       else {
@@ -112,13 +129,11 @@ export const ToggleTheme = memo(({ responsive }) => {
   );
 
   useEffect(() => {
-    setMounted(true);
-
     window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   if (!mounted) {
     return null;

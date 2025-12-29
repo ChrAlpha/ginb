@@ -1,8 +1,15 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/lib/blog";
 import { sitename, description } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const generateMetadata = ({ params: { page } }) => {
+interface PageProps {
+  params: Promise<{ page: string }>;
+}
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const { page } = await params;
   return {
     title: `Page ${page}`,
     openGraph: {
@@ -15,7 +22,12 @@ export const generateMetadata = ({ params: { page } }) => {
   };
 };
 
-export default async function Page({ params: { page } }) {
+export default async function Page({ params }: PageProps) {
+  "use cache";
+  const { page } = await params;
+  cacheLife("hours");
+  cacheTag("blog-posts", `page-${page}`);
+
   const posts = (await blogInit()).sort((a, b) => {
     if (a.tags.includes("Top") && !b.tags.includes("Top")) {
       return -1;

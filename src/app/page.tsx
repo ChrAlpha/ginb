@@ -1,8 +1,10 @@
 import PostList from "/src/components/PostList";
 import { blogInit } from "/src/lib/blog";
 import { sitename, description } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Home | " + sitename,
   openGraph: {
     title: "Home | " + sitename,
@@ -14,6 +16,10 @@ export const metadata = {
 };
 
 export default async function Page() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("home-page");
+
   const posts = (await blogInit()).sort((a, b) => {
     if (a.tags.includes("Top") && !b.tags.includes("Top")) {
       return -1;

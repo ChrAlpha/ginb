@@ -1,10 +1,10 @@
+import type { ReactNode } from "react";
+
 /**
  * Parse markdown-style links in text and convert to React elements
- * @param {string} text - Text containing markdown links
- * @returns {Array} Array of text and link elements
  */
-export const parseMarkdownLinks = (text) => {
-  const parts = [];
+export const parseMarkdownLinks = (text: string): (string | ReactNode)[] => {
+  const parts: (string | ReactNode)[] = [];
   let lastIndex = 0;
   const regex = /\[([^\]]+)]\(([^)]+)\)/g;
   let match;

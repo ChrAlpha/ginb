@@ -4,8 +4,10 @@ import AuthorCard from "/src/components/AuthorCard";
 import { ThemeProviders } from "../components/ToggleTheme";
 import "./globals.css";
 import { sitename, username, description, keywords, url, favicon } from "/_config";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(url),
   title: {
     template: `%s | ${sitename}`,
@@ -13,7 +15,7 @@ export const metadata = {
   },
   description: description,
   keywords: keywords,
-  author: username,
+  authors: [{ name: username }],
   openGraph: {
     title: sitename,
     description: description,
@@ -47,14 +49,18 @@ export const metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
 };
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html suppressHydrationWarning>
       <body className="break-words dark:bg-black dark:text-white">

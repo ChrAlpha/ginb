@@ -2,8 +2,15 @@ import { ArchivesList } from "/src/components/ArchivesList";
 import { getPostsByTag } from "/src/lib/blog";
 import { notFound } from "next/navigation";
 import { sitename, keywords } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const generateMetadata = async ({ params: { tag } }) => {
+interface TagPageProps {
+  params: Promise<{ tag: string }>;
+}
+
+export const generateMetadata = async ({ params }: TagPageProps): Promise<Metadata> => {
+  const { tag } = await params;
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (!postsWithSpecTag) {
     return {
@@ -27,7 +34,12 @@ export const generateMetadata = async ({ params: { tag } }) => {
   };
 };
 
-export default async function TagPage({ params: { tag } }) {
+export default async function TagPage({ params }: TagPageProps) {
+  "use cache";
+  const { tag } = await params;
+  cacheLife("hours");
+  cacheTag("blog-posts", `tag-${tag}`);
+
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (postsWithSpecTag.length === 0) {
     // 404 Not Found

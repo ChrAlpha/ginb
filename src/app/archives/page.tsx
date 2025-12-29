@@ -1,14 +1,15 @@
 import { blogInit } from "/src/lib/blog";
 import { ArchivesList } from "/src/components/ArchivesList";
 import { sitename } from "/_config";
+import { cacheLife, cacheTag } from "next/cache";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Archives",
-  siteName: sitename,
-  descriptopn: `Archive all posts in ${sitename}.`,
+  description: `Archive all posts in ${sitename}.`,
   openGraph: {
     title: `Archives | ${sitename}`,
-    descriptopn: `Archive all posts in ${sitename}.`,
+    description: `Archive all posts in ${sitename}.`,
     siteName: sitename,
     url: "/",
     type: "website",
@@ -16,6 +17,10 @@ export const metadata = {
 };
 
 export default async function Archives() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("archives-page");
+
   const posts = await blogInit();
 
   return (

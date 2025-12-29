@@ -1,10 +1,28 @@
 import { Octokit } from "octokit";
-import { cache } from "react";
+import { cacheLife, cacheTag } from "next/cache";
 import { slug as slugger } from "github-slugger";
 import { username, repository } from "/_config";
+import type { Post } from "/src/types";
 
-export const blogInit = cache(async () => {
-  const formatIssues = (issues) => {
+interface GitHubIssue {
+  title: string;
+  number: number;
+  url: string;
+  html_url: string;
+  created_at: string;
+  updated_at: string;
+  labels: { name: string }[];
+  body: string;
+  comments: number;
+  pull_request?: unknown;
+}
+
+export async function blogInit(): Promise<Post[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("blog-posts");
+
+  const formatIssues = (issues: GitHubIssue[]): Post[] => {
     return issues.map(issue => ({
       title: issue.title,
       slug: slugger(String(issue.number)),
@@ -29,17 +47,25 @@ export const blogInit = cache(async () => {
     repo: repository,
     creator: username,
     per_page: 100,
-  });
+  }) as GitHubIssue[];
 
   return formatIssues(issues.filter(issue => !issue.pull_request));
-});
+}
 
-export const getPostBySlug = cache(async (slug) => {
+export async function getPostBySlug(slug: string): Promise<Post | undefined> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("blog-posts", `post-${slug}`);
+
   const posts = await blogInit();
   return posts.find(post => slugger(post.slug) === slugger(slug));
-});
+}
 
-export const getPostsByTag = cache(async (tag) => {
+export async function getPostsByTag(tag: string): Promise<Post[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("blog-posts", `tag-${tag}`);
+
   const posts = await blogInit();
   return posts.filter(post => post.tags.some(t => slugger(t) === slugger(tag)));
-});
+}

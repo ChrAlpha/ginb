@@ -22,7 +22,7 @@ export const Author = memo(() => {
           </div>
         </div>
       </div>
-      {siteConfig.social && (
+      {siteConfig.social && Object.keys(siteConfig.social).length > 0 && (
         <ul className="flex list-none flex-col gap-2 text-sm">
           {Object.keys(siteConfig.social).map(key => (
             <li key={key}>

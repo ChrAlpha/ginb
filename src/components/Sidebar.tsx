@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, memo } from "react";
+import { useState, memo } from "react";
 import { NavBar } from "./layout/Header";
 import { sitename } from "/_config";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,10 +11,7 @@ const Sidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   if (!mounted) {
     return (

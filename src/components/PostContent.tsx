@@ -7,11 +7,11 @@ import remarkMath from "remark-math";
 import Link from "next/link";
 import { slug as slugger } from "github-slugger";
 import { memo } from "react";
-import "/public/github.css";
+import "/src/app/github.css";
 import "katex/dist/katex.min.css";
 import Image from "next/image";
 
-const formatDate = (date) => {
+const formatDate = (date: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -20,7 +20,16 @@ const formatDate = (date) => {
   return formatter.format(new Date(date));
 };
 
-const PostContent = async ({ title, created_at, contentRaw, tags, comments, html_url }) => {
+interface PostContentProps {
+  title: string;
+  created_at: string;
+  contentRaw: string;
+  tags: string[];
+  comments: number;
+  html_url: string;
+}
+
+const PostContent = async ({ title, created_at, contentRaw, tags, comments, html_url }: PostContentProps) => {
   return (
     <article className="mt-8 rounded-lg border md:mt-0">
       <div className="p-4">
@@ -51,21 +60,23 @@ const PostContent = async ({ title, created_at, contentRaw, tags, comments, html
                 );
               },
               img: (props) => {
-                const { src, width, height, ...rest } = props;
-                delete rest.node;
-                if (!src) {
-                  return <img {...rest} />;
+                const { src, width, height, alt, ...rest } = props;
+                const restWithoutNode = { ...rest } as Record<string, unknown>;
+                delete restWithoutNode.node;
+                const imgSrc = typeof src === "string" ? src : undefined;
+                if (!imgSrc) {
+                  return <img alt={alt} {...restWithoutNode} />;
                 }
                 if (width && height) {
                   return (
-                    <a href={src} target="_blank" rel="noopener noreferrer">
-                      <Image src={src} width={width} height={height} {...rest} />
+                    <a href={imgSrc} target="_blank" rel="noopener noreferrer">
+                      <Image src={imgSrc} width={Number(width)} height={Number(height)} alt={alt || ""} {...restWithoutNode} />
                     </a>
                   );
                 }
                 return (
-                  <a href={src} target="_blank" rel="noopener noreferrer">
-                    <img src={src} width={width} height={height} {...rest} />
+                  <a href={imgSrc} target="_blank" rel="noopener noreferrer">
+                    <img src={imgSrc} width={width} height={height} alt={alt} {...restWithoutNode} />
                   </a>
                 );
               },

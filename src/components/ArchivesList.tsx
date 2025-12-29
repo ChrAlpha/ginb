@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { memo } from "react";
+import { Fragment, memo } from "react";
+import type { Post } from "/src/types";
 
-const formatDate = (date) => {
+const formatDate = (date: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
     month: "2-digit",
     day: "2-digit",
@@ -9,7 +10,13 @@ const formatDate = (date) => {
   return formatter.format(new Date(date));
 };
 
-const ArchivesEntry = memo(({ title, date, path }) => {
+interface ArchivesEntryProps {
+  title: string;
+  date: string;
+  path: string;
+}
+
+const ArchivesEntry = memo(({ title, date, path }: ArchivesEntryProps) => {
   return (
     <li className="relative flex w-full flex-row border-l p-4">
       <span className="absolute -left-[5.5px] top-5 my-auto size-2.5 rounded-full bg-[#eaeaea] dark:bg-[#333]"></span>
@@ -23,25 +30,34 @@ const ArchivesEntry = memo(({ title, date, path }) => {
   );
 });
 
-export const ArchivesList = memo(({ posts }) => {
-  let yr = "";
+interface ArchivesListProps {
+  posts: Post[];
+}
+
+export const ArchivesList = memo(({ posts }: ArchivesListProps) => {
   return (
     <ul className="p-4">
-      {posts.map((post) => {
-        if (new Date(post.created_at).getFullYear() != yr) {
-          yr = new Date(post.created_at).getFullYear();
+      {posts.map((post, index) => {
+        const postYear = new Date(post.created_at).getFullYear();
+        const prevYear = index > 0
+          ? new Date(posts[index - 1].created_at).getFullYear()
+          : null;
+        const showYearHeader = postYear !== prevYear;
+
+        if (showYearHeader) {
           return (
-            <>
-              <h2 className="-ml-4 text-2xl" id={"archives-" + yr}>
-                {yr}
-              </h2>
+            <Fragment key={post.slug}>
+              <li className="-ml-4 list-none">
+                <h2 className="text-2xl" id={"archives-" + postYear}>
+                  {postYear}
+                </h2>
+              </li>
               <ArchivesEntry
-                key={post.slug}
                 title={post.title}
                 date={post.created_at}
                 path={"/" + post.path}
               />
-            </>
+            </Fragment>
           );
         }
         else {
