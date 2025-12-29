@@ -1,5 +1,5 @@
-import PostContent from "/src/components/PostContent";
-import { getPostBySlug } from "/src/lib/blog";
+import PostContent from "@/components/PostContent";
+import { getPostBySlug } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { site, github } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";

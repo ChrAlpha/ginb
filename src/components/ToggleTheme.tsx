@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useContext, createContext, useCallback, memo, type ReactNode } from "react";
-import type { Theme, ThemeContextType } from "/src/types";
+import type { Theme, ThemeContextType } from "@/types";
 import { useMounted } from "@/lib/hooks/useMounted";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);

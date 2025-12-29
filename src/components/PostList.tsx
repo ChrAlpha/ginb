@@ -3,7 +3,7 @@ import { slug } from "github-slugger";
 import { memo } from "react";
 import { pagination } from "/_config";
 import { notFound } from "next/navigation";
-import type { Post } from "/src/types";
+import type { Post } from "@/types";
 
 const formatDate = (date: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {

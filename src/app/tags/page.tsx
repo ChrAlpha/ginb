@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { blogInit } from "/src/lib/blog";
+import { blogInit } from "@/lib/blog";
 import { slug } from "github-slugger";
 import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";

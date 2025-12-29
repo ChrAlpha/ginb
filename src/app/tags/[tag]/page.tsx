@@ -1,5 +1,5 @@
-import { ArchivesList } from "/src/components/ArchivesList";
-import { getPostsByTag } from "/src/lib/blog";
+import { ArchivesList } from "@/components/ArchivesList";
+import { getPostsByTag } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";

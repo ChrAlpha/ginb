@@ -1,5 +1,5 @@
-import { blogInit } from "/src/lib/blog";
-import { ArchivesList } from "/src/components/ArchivesList";
+import { blogInit } from "@/lib/blog";
+import { ArchivesList } from "@/components/ArchivesList";
 import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";

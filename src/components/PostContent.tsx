@@ -7,7 +7,7 @@ import remarkMath from "remark-math";
 import Link from "next/link";
 import { slug as slugger } from "github-slugger";
 import { memo } from "react";
-import "/src/app/github.css";
+import "@/app/github.css";
 import "katex/dist/katex.min.css";
 import Image from "next/image";
 

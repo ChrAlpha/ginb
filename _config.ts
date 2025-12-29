@@ -1,4 +1,4 @@
-import type { SiteConfig, LegacySiteConfig, SocialLink } from "/src/types";
+import type { SiteConfig, LegacySiteConfig, SocialLink } from "@/types";
 
 // =============================================================================
 // HELPER FUNCTIONS

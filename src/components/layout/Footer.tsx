@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { footer } from "/_config";
-import { parseMarkdownLinks } from "/src/lib/utils/markdown";
+import { parseMarkdownLinks } from "@/lib/utils/markdown";
 
 const Footer = async () => {
   const rawFooter = `Copyright © ${new Date().getFullYear()}` + (footer.content ? ` | ${footer.content}` : "");

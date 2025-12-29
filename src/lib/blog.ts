@@ -2,7 +2,7 @@ import { Octokit } from "octokit";
 import { cacheLife, cacheTag } from "next/cache";
 import { slug as slugger } from "github-slugger";
 import { github } from "/_config";
-import type { Post } from "/src/types";
+import type { Post } from "@/types";
 
 interface GitHubIssue {
   title: string;

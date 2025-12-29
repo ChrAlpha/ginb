@@ -1,7 +1,7 @@
 import { Feed } from "feed";
 import { cache } from "react";
 import { site, github, url } from "/_config";
-import type { Post } from "/src/types";
+import type { Post } from "@/types";
 
 export const generateRssFeed = cache((posts: Post[]): string => {
   const feed = new Feed({

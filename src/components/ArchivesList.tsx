@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment, memo } from "react";
-import type { Post } from "/src/types";
+import type { Post } from "@/types";
 
 const formatDate = (date: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {

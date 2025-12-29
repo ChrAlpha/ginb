@@ -1,6 +1,6 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import AuthorCard from "/src/components/AuthorCard";
+import AuthorCard from "@/components/AuthorCard";
 import { ThemeProviders } from "../components/ToggleTheme";
 import "./globals.css";
 import { site, github, url } from "/_config";
