@@ -103,6 +103,6 @@ export interface LegacySiteConfig {
 export type Theme = "light" | "dark" | "system";
 
 export interface ThemeContextType {
-  theme: Theme | undefined;
+  theme: Theme;
   setTheme: (theme: Theme) => void;
 }

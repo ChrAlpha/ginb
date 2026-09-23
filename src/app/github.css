@@ -1,44 +1,24 @@
-:root {
-  --hljs-bg: #f6f8fa;
-  --hljs-text: #24292e;
-  --hljs-keyword: #d73a49;
-  --hljs-entity: #6f42c1;
-  --hljs-constant: #005cc5;
-  --hljs-string: #032f62;
-  --hljs-variable: #e36209;
-  --hljs-comment: #6a737d;
-  --hljs-entity-tag: #22863a;
-  --hljs-markup-heading: #005cc5;
-  --hljs-markup-list: #735c0f;
-  --hljs-markup-inserted-bg: #f0fff4;
-  --hljs-markup-deleted-bg: #ffeef0;
-  --hljs-markup-inserted-deleted-text: #22863a;
+/* Map highlight.js scopes onto Primer's syntax tokens, which follow data-color-mode */
+.markdown-body {
+  --hljs-text: var(--fgColor-default);
+  --hljs-keyword: var(--color-prettylights-syntax-keyword);
+  --hljs-entity: var(--color-prettylights-syntax-entity);
+  --hljs-constant: var(--color-prettylights-syntax-constant);
+  --hljs-string: var(--color-prettylights-syntax-string);
+  --hljs-variable: var(--color-prettylights-syntax-variable);
+  --hljs-comment: var(--color-prettylights-syntax-comment);
+  --hljs-entity-tag: var(--color-prettylights-syntax-entity-tag);
+  --hljs-markup-heading: var(--color-prettylights-syntax-markup-heading);
+  --hljs-markup-list: var(--color-prettylights-syntax-markup-list);
+  --hljs-markup-inserted-bg: var(--color-prettylights-syntax-markup-inserted-bg);
+  --hljs-markup-inserted-text: var(--color-prettylights-syntax-markup-inserted-text);
+  --hljs-markup-deleted-bg: var(--color-prettylights-syntax-markup-deleted-bg);
+  --hljs-markup-deleted-text: var(--color-prettylights-syntax-markup-deleted-text);
 }
 
-[class="dark"] {
-  --hljs-bg: #0d1117;
-  --hljs-text: #c9d1d9;
-  --hljs-keyword: #ff7b72;
-  --hljs-entity: #d2a8ff;
-  --hljs-constant: #79c0ff;
-  --hljs-string: #a5d6ff;
-  --hljs-variable: #ffa657;
-  --hljs-comment: #8b949e;
-  --hljs-entity-tag: #7ee787;
-  --hljs-markup-heading: #1f6feb;
-  --hljs-markup-list: #f2cc60;
-  --hljs-markup-inserted-bg: #033a16;
-  --hljs-markup-deleted-bg: #67060c;
-  --hljs-markup-inserted-deleted-text: #aff5b4;
-}
-
+/* Padding, background and scrolling come from Primer's markdown.css */
 pre code {
-  display: block !important;
-  overflow-x: auto !important;
-  padding: 16px !important;
-  border-radius: 0px !important;
   color: var(--hljs-text) !important;
-  background: var(--hljs-bg) !important;
 }
 
 .hljs-doctag,
@@ -113,11 +93,11 @@ pre code {
 }
 
 .hljs-addition {
-  color: var(--hljs-markup-inserted-deleted-text);
+  color: var(--hljs-markup-inserted-text);
   background-color: var(--hljs-markup-inserted-bg);
 }
 
 .hljs-deletion {
-  color: var(--hljs-markup-inserted-deleted-text);
+  color: var(--hljs-markup-deleted-text);
   background-color: var(--hljs-markup-deleted-bg);
 }

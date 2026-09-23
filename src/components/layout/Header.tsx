@@ -15,6 +15,12 @@ import {
 } from "@primer/octicons-react";
 import { UnderlineNav, Avatar, IconButton, ActionMenu, ActionList } from "@primer/react";
 
+const THEME_OPTIONS = [
+  { value: "light", label: "Light", icon: SunIcon },
+  { value: "dark", label: "Dark", icon: MoonIcon },
+  { value: "system", label: "System", icon: DeviceDesktopIcon },
+] as const;
+
 // /_config reads server-only env vars, so the server layout passes these in
 interface HeaderProps {
   title: string;
@@ -75,7 +81,7 @@ const Header = ({ title, owner }: HeaderProps) => {
       </div>
 
       {/* Center section: UnderlineNav */}
-      <UnderlineNav aria-label="Navigation" className="flex-auto">
+      <UnderlineNav aria-label="Navigation" className="flex-auto min-width-0">
         <UnderlineNav.Item
           as={Link}
           href="/"
@@ -101,6 +107,39 @@ const Header = ({ title, owner }: HeaderProps) => {
           Tags
         </UnderlineNav.Item>
       </UnderlineNav>
+
+      {/* Right section: Theme switcher + RSS */}
+      <div className="d-flex flex-items-center flex-shrink-0 ml-2">
+        <ActionMenu>
+          <ActionMenu.Anchor>
+            <IconButton icon={ThemeIcon} variant="invisible" aria-label="Change color theme" />
+          </ActionMenu.Anchor>
+          <ActionMenu.Overlay width="auto" align="end">
+            <ActionList selectionVariant="single">
+              {THEME_OPTIONS.map(option => (
+                <ActionList.Item
+                  key={option.value}
+                  selected={theme === option.value}
+                  onSelect={() => setTheme(option.value)}
+                >
+                  <ActionList.LeadingVisual>
+                    <option.icon />
+                  </ActionList.LeadingVisual>
+                  {option.label}
+                </ActionList.Item>
+              ))}
+            </ActionList>
+          </ActionMenu.Overlay>
+        </ActionMenu>
+        <IconButton
+          as="a"
+          href="/rss"
+          target="_blank"
+          icon={RssIcon}
+          variant="invisible"
+          aria-label="RSS feed of this site"
+        />
+      </div>
     </div>
   );
 };

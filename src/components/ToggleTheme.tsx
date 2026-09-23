@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useEffect, useContext, createContext, useCallback, memo, type ReactNode } from "react";
+import { useContext, createContext, useCallback, useSyncExternalStore, memo, type ReactNode } from "react";
 import type { Theme, ThemeContextType } from "@/types";
-import { BaseStyles, ThemeProvider } from "@primer/react";
+import { BaseStyles } from "@primer/react";
+
+const STORAGE_KEY = "user-color-scheme";
+const THEME_CHANGE_EVENT = "user-color-scheme-change";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -14,89 +17,62 @@ export const useTheme = () => {
   return context;
 };
 
+const getStoredTheme = (): Theme => {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === "light" || stored === "dark" ? stored : "system";
+};
+
+// Primer CSS resolves "auto" against prefers-color-scheme by itself
+const applyColorMode = (theme: Theme) => {
+  document.documentElement.setAttribute("data-color-mode", theme === "system" ? "auto" : theme);
+};
+
+const subscribe = (onChange: () => void) => {
+  // "storage" fires for changes from other tabs, THEME_CHANGE_EVENT for this one
+  const handleChange = () => {
+    applyColorMode(getStoredTheme());
+    onChange();
+  };
+  window.addEventListener("storage", handleChange);
+  window.addEventListener(THEME_CHANGE_EVENT, handleChange);
+  return () => {
+    window.removeEventListener("storage", handleChange);
+    window.removeEventListener(THEME_CHANGE_EVENT, handleChange);
+  };
+};
+
+// localStorage is unavailable on the server, so hydrate as "system" and let React
+// re-render with the stored theme; the inline script has already applied it to <html>
+const getServerTheme = (): Theme => "system";
+
+const themeScript = `!function(){try{var t=localStorage.getItem("${STORAGE_KEY}");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-color-mode",t)}catch(e){}}()`;
+
 interface ThemeProvidersProps {
   children: ReactNode;
 }
 
 export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
-  const [theme, setTheme] = useState<Theme | undefined>(() => {
-    if (typeof window === "undefined") {
-      return undefined;
-    }
-    const localTheme = localStorage.getItem("user-color-scheme") as Theme | null;
-    return localTheme || "system";
-  });
-  const [colorScheme, setColorScheme] = useState<"light" | "dark" | undefined>(() => {
-    if (typeof window === "undefined") {
-      return undefined;
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
+  const theme = useSyncExternalStore(subscribe, getStoredTheme, getServerTheme);
+
+  const setTheme = useCallback((nextTheme: Theme) => {
+    if (nextTheme === "system") {
+      localStorage.removeItem(STORAGE_KEY);
     }
     else {
-      return "light";
+      localStorage.setItem(STORAGE_KEY, nextTheme);
     }
-  });
-
-  const handleColorSchemeChange = useCallback(
-    (event?: MediaQueryListEvent | MediaQueryList) => {
-      if (!event) {
-        event = window.matchMedia("(prefers-color-scheme: dark)");
-      }
-      if (event.matches) {
-        setColorScheme("dark");
-      }
-      else {
-        setColorScheme("light");
-      }
-    },
-    [setColorScheme],
-  );
-
-  useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", handleColorSchemeChange);
-
-    return () => {
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .removeEventListener("change", handleColorSchemeChange);
-    };
-  }, [handleColorSchemeChange]);
-
-  useEffect(() => {
-    if (theme != "system" && theme != "light" && theme != "dark") {
-      console.error("color must be system, light or dark");
-    }
-    else {
-      const resolvedColorMode = theme === "system" ? colorScheme : theme;
-      if (theme == "system") {
-        typeof window !== "undefined" && localStorage.removeItem("user-color-scheme");
-      }
-      else {
-        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", theme);
-      }
-      document.documentElement.setAttribute("data-color-mode", resolvedColorMode || "light");
-    }
-  }, [theme, colorScheme]);
-
-  const primerColorMode = theme === "system" ? "auto" : theme;
+    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
+  }, []);
 
   return (
     <>
       <script
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html:
-            "!function(){const e=localStorage.getItem(\"user-color-scheme\");const mode=\"dark\"===e||(!e&&window.matchMedia(\"(prefers-color-scheme: dark)\").matches)?\"dark\":\"light\";document.documentElement.setAttribute(\"data-color-mode\",mode);}()",
-        }}
+        dangerouslySetInnerHTML={{ __html: themeScript }}
       />
-      <ThemeProvider colorMode={primerColorMode || "auto"}>
-        <BaseStyles>
-          <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
-        </BaseStyles>
-      </ThemeProvider>
+      <BaseStyles>
+        <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+      </BaseStyles>
     </>
   );
 });

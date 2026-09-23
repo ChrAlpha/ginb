@@ -63,7 +63,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html suppressHydrationWarning>
+    <html
+      suppressHydrationWarning
+      data-color-mode="auto"
+      data-light-theme="light"
+      data-dark-theme="dark"
+    >
       <body>
         <ThemeProviders>
           <MainLayout
