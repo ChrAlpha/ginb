@@ -12,7 +12,7 @@ ginb (GitHub Issues Next.js Blog) is a blog template that uses GitHub Issues as 
 
 ## 特性 Features
 
-- [x] Dark mode
+- [x] Dark mode (light / dark / follow system)
 - [x] GitHub flavored markdown
 - [x] Syntax highlight
 - [x] KaTeX support
@@ -93,7 +93,7 @@ All kinds of contributions are welcomed, including but not limited to theme opti
 ## 相关项目 Related Projects
 
 - Front-end framework: [Next.js](https://nextjs.org/)
-- Front-end style: [Tailwind CSS](https://tailwindcss.com/)
+- Front-end style: [Primer](https://primer.style/) ([Primer React](https://primer.style/product/getting-started/react/) and [Primer CSS](https://github.com/primer/css))
 - CMS: [GitHub Issues](https://docs.github.com/en/rest/reference/issues)
 - Markdown content parser: [react-markdown](https://github.com/remarkjs/react-markdown)
 - Syntax highlighter: [rehype-highlight](https://github.com/rehypejs/rehype-highlight)
