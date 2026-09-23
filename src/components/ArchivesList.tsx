@@ -4,8 +4,8 @@ import type { Post } from "@/types";
 
 const formatDate = (date: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "2-digit",
-    day: "2-digit",
+    month: "short",
+    day: "numeric",
   });
   return formatter.format(new Date(date));
 };
@@ -18,24 +18,19 @@ interface ArchivesEntryProps {
 
 const ArchivesEntry = memo(({ title, date, path }: ArchivesEntryProps) => {
   return (
-    <li className="relative flex w-full flex-row border-l p-4">
-      <span className={`
-        absolute top-5 -left-[5.5px] my-auto size-2.5 rounded-full bg-[#eaeaea]
-        dark:bg-[#333]
-      `}
-      >
-      </span>
-      <span className={`
-        mr-2 shrink-0 text-sm text-black/60 tabular-nums
-        dark:text-white/60
-      `}
-      >
-        {formatDate(date)}
-      </span>
-      <Link className="hover:underline" href={path}>
-        <h3>{title}</h3>
-      </Link>
-    </li>
+    <div className="TimelineItem">
+      <div className="TimelineItem-badge">
+        <span className="color-bg-accent-emphasis d-block circle" style={{ width: 8, height: 8 }}></span>
+      </div>
+      <div className="TimelineItem-body d-flex flex-items-baseline">
+        <span className="color-fg-muted text-small mr-2" style={{ minWidth: 50 }}>
+          {formatDate(date)}
+        </span>
+        <Link href={path} className="Link--primary">
+          {title}
+        </Link>
+      </div>
+    </div>
   );
 });
 
@@ -45,7 +40,7 @@ interface ArchivesListProps {
 
 export const ArchivesList = memo(({ posts }: ArchivesListProps) => {
   return (
-    <ul className="p-4">
+    <div>
       {posts.map((post, index) => {
         const postYear = new Date(post.created_at).getFullYear();
         const prevYear = index > 0
@@ -56,11 +51,10 @@ export const ArchivesList = memo(({ posts }: ArchivesListProps) => {
         if (showYearHeader) {
           return (
             <Fragment key={post.slug}>
-              <li className="-ml-4 list-none">
-                <h2 className="text-2xl" id={"archives-" + postYear}>
-                  {postYear}
-                </h2>
-              </li>
+              <h2 className="f3 mb-2 mt-4" id={"archives-" + postYear}>
+                {postYear}
+              </h2>
+              <div className="TimelineItem-break"></div>
               <ArchivesEntry
                 title={post.title}
                 date={post.created_at}
@@ -80,6 +74,6 @@ export const ArchivesList = memo(({ posts }: ArchivesListProps) => {
           );
         }
       })}
-    </ul>
+    </div>
   );
 });

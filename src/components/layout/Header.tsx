@@ -1,113 +1,102 @@
-import { ToggleTheme } from "../ToggleTheme";
-import Sidebar from "../Sidebar";
+"use client";
+
 import Link from "next/link";
-import { memo } from "react";
-import { site } from "/_config";
-
-interface NavBarProps {
-  responsive: string;
-  click?: (() => void) | false;
-}
-
-export const NavBar = memo(({ responsive, click = false }: NavBarProps) => {
-  return (
-    <>
-      <nav className={responsive + " flex-col gap-6 md:flex-row"}>
-        <Link
-          className={`
-            my-auto hidden
-            md:block
-          `}
-          href="/"
-        >
-          <h2 className="inline text-xl">{site.title}</h2>
-        </Link>
-        <Link
-          className={`
-            my-auto p-2 text-black/60
-            hover:text-black
-            dark:text-white/60 dark:hover:text-white
-          `}
-          href="/"
-          onClick={click || undefined}
-        >
-          Home
-        </Link>
-        <Link
-          className={`
-            my-auto p-2 text-black/60
-            hover:text-black
-            dark:text-white/60 dark:hover:text-white
-          `}
-          href="/archives/"
-          onClick={click || undefined}
-        >
-          Archives
-        </Link>
-        <Link
-          className={`
-            my-auto p-2 text-black/60
-            hover:text-black
-            dark:text-white/60 dark:hover:text-white
-          `}
-          href="/tags/"
-          onClick={click || undefined}
-        >
-          Tags
-        </Link>
-      </nav>
-    </>
-  );
-});
+import { usePathname } from "next/navigation";
+import { memo, useState, useEffect } from "react";
+import { site, github } from "/_config";
+import { useTheme } from "../ToggleTheme";
+import {
+  HomeIcon,
+  ArchiveIcon,
+  TagIcon,
+  RssIcon,
+  SunIcon,
+  MoonIcon,
+  DeviceDesktopIcon,
+} from "@primer/octicons-react";
+import { UnderlineNav, Avatar, IconButton, ActionMenu, ActionList } from "@primer/react";
 
 const Header = () => {
+  const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
+  const [showCompactHeader, setShowCompactHeader] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show compact header once the sidebar avatar has scrolled out of view
+      setShowCompactHeader(window.scrollY > 460);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return pathname === "/" || pathname.startsWith("/page/") || pathname.startsWith("/post/");
+    }
+    return pathname.startsWith(path);
+  };
+
+  const ThemeIcon = theme === "dark" ? MoonIcon : theme === "light" ? SunIcon : DeviceDesktopIcon;
+
   return (
-    <>
-      <header className={`
-        sticky top-0 z-50 order-first flex min-h-12 w-full items-stretch
-        border-b bg-white
-        md:bg-white/90 md:backdrop-blur-sm
-        dark:bg-black
-        md:dark:bg-black/80
-      `}
-      >
-        <div className={`
-          container mx-auto flex w-full max-w-screen-xl items-stretch
-          justify-between px-4
-        `}
+    <div
+      className="d-flex px-3 px-md-4 px-lg-5"
+      style={{ height: "100%", maxWidth: 1280, margin: "0 auto", marginBottom: -1 }}
+    >
+      {/* Left section: Avatar + Site name (same width as sidebar) */}
+      <div className="header-sidebar d-none d-md-flex flex-items-center flex-shrink-0">
+        <div
+          className="d-flex flex-items-center"
+          style={{
+            opacity: showCompactHeader ? 1 : 0,
+            transition: "opacity 0.2s ease-in-out",
+            pointerEvents: showCompactHeader ? "auto" : "none",
+          }}
         >
-          <Sidebar />
-          <NavBar responsive="hidden md:flex" />
-          <div className="relative flex flex-row items-center gap-4">
-            <ToggleTheme />
-            <a
-              className={`
-                text-[#666]
-                hover:text-black
-                focus:outline-none
-                dark:text-[#888] dark:hover:text-white
-              `}
-              target="_blank"
-              href="/rss"
-              aria-label="RSS feed of this site"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3.75 4.5a.75.75 0 0 1 .75-.75h.75c8.284 0 15 6.716 15 15v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75C18 11.708 12.292 6 5.25 6H4.5a.75.75 0 0 1-.75-.75V4.5Zm0 6.75a.75.75 0 0 1 .75-.75h.75a8.25 8.25 0 0 1 8.25 8.25v.75a.75.75 0 0 1-.75.75H12a.75.75 0 0 1-.75-.75v-.75a6 6 0 0 0-6-6H4.5a.75.75 0 0 1-.75-.75v-.75Zm0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
-          </div>
+          <Avatar
+            src={`https://github.com/${github.owner}.png`}
+            alt="Avatar"
+            size={32}
+          />
+          <Link
+            href="/"
+            className="f5 text-bold color-fg-default no-underline ml-2"
+          >
+            {site.title}
+          </Link>
         </div>
-      </header>
-    </>
+      </div>
+
+      {/* Center section: UnderlineNav */}
+      <UnderlineNav aria-label="Navigation" className="flex-auto">
+        <UnderlineNav.Item
+          as={Link}
+          href="/"
+          aria-current={isActive("/") ? "page" : undefined}
+          icon={HomeIcon}
+        >
+          Posts
+        </UnderlineNav.Item>
+        <UnderlineNav.Item
+          as={Link}
+          href="/archives/"
+          aria-current={isActive("/archives") ? "page" : undefined}
+          icon={ArchiveIcon}
+        >
+          Archives
+        </UnderlineNav.Item>
+        <UnderlineNav.Item
+          as={Link}
+          href="/tags/"
+          aria-current={isActive("/tags") ? "page" : undefined}
+          icon={TagIcon}
+        >
+          Tags
+        </UnderlineNav.Item>
+      </UnderlineNav>
+    </div>
   );
 };
 

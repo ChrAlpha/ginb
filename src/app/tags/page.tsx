@@ -4,6 +4,7 @@ import { slug } from "github-slugger";
 import { site } from "/_config";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Metadata } from "next";
+import { TagIcon } from "@primer/octicons-react";
 
 export const metadata: Metadata = {
   title: "Tags",
@@ -37,24 +38,17 @@ export default async function Tags() {
 
   return (
     <>
-      <div className="w-full p-4">
-        <h1 className="text-3xl font-semibold">Tags</h1>
+      <div className="Subhead">
+        <h1 className="Subhead-heading">Tags</h1>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="Box">
         {Object.keys(allTagsWithCount).map(tag => (
-          <Link key={tag} href={"/tags/" + slug(tag)}>
-            <div className="flex w-full justify-between rounded-lg border p-4">
-              <span>{tag}</span>
-              <span className={`
-                my-auto block text-sm text-black/60
-                dark:text-white/60
-              `}
-              >
-                {allTagsWithCount[tag]}
-                {" "}
-                Posts
-              </span>
-            </div>
+          <Link key={tag} href={"/tags/" + slug(tag)} className="Box-row d-flex flex-items-center flex-justify-between">
+            <span className="d-flex flex-items-center">
+              <TagIcon size={16} className="mr-2 color-fg-muted" />
+              {tag}
+            </span>
+            <span className="Counter">{allTagsWithCount[tag]}</span>
           </Link>
         ))}
       </div>

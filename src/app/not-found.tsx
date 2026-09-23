@@ -3,18 +3,12 @@ import { memo } from "react";
 
 function NotFound() {
   return (
-    <div className="m-auto">
-      <h1 className="text-center text-2xl">404 Page Not Found</h1>
-      <p className="mx-auto mt-8 max-w-main text-center">
+    <div className="blankslate">
+      <h3 className="blankslate-heading">404 Page Not Found</h3>
+      <p>
         Maybe this link is broken.
         {" "}
-        <Link
-          className={`
-            text-blue-600
-            hover:underline
-          `}
-          href="/"
-        >
+        <Link href="/" className="Link--primary">
           Back to homepage
         </Link>
         {" "}

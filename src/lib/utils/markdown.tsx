@@ -18,14 +18,7 @@ export const parseMarkdownLinks = (text: string): (string | ReactNode)[] => {
     }
 
     parts.push(
-      <a
-        href={linkUrl}
-        key={startIndex}
-        className={`
-          text-blue-600
-          hover:underline
-        `}
-      >
+      <a href={linkUrl} key={startIndex}>
         {linkText}
       </a>,
     );

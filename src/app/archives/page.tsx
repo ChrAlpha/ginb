@@ -25,17 +25,13 @@ export default async function Archives() {
 
   return (
     <>
-      <div className="w-full p-4">
-        <h1 className="text-3xl font-semibold">Archives</h1>
-        <span className={`
-          text-black/60
-          dark:text-white/60
-        `}
-        >
+      <div className="Subhead">
+        <h1 className="Subhead-heading">Archives</h1>
+        <div className="Subhead-description color-fg-muted">
           {posts.length}
           {" "}
-          Posts in total
-        </span>
+          posts in total
+        </div>
       </div>
       <ArchivesList posts={posts} />
     </>

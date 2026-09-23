@@ -7,17 +7,11 @@ const Footer = async () => {
   const parsedFooter = parseMarkdownLinks(rawFooter);
 
   return (
-    <>
-      <footer className={`
-        mt-auto h-12 border-t p-4 text-xs text-black/60
-        dark:text-white/60
-      `}
-      >
-        <p className="container mx-auto w-full max-w-screen-xl">
-          {parsedFooter.map(part => part)}
-        </p>
-      </footer>
-    </>
+    <div className="py-4 border-top color-border-muted">
+      <p className="color-fg-muted text-small mb-0">
+        {parsedFooter.map(part => part)}
+      </p>
+    </div>
   );
 };
 

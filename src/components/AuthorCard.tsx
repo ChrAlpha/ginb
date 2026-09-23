@@ -1,67 +1,70 @@
 import { memo } from "react";
 import { site, github, social } from "/_config";
-import Image from "next/image";
+import { Avatar } from "@primer/react";
+import { LinkIcon, MarkGithubIcon } from "@primer/octicons-react";
 
 export const Author = memo(() => {
   return (
-    <div className="flex flex-col gap-4">
-      <div className={`
-        flex h-min w-full flex-row items-center gap-4
-        md:flex-col
-      `}
-      >
-        <div className={`
-          w-24 shrink-0 rounded-full
-          md:w-2/3
-        `}
-        >
-          <Image
-            className="rounded-full"
-            src={`https://github.com/${github.owner}.png`}
-            width={192}
-            height={192}
-            alt="Avatar"
-          />
-        </div>
-        <div>
-          <h2 className="w-full font-light">{github.owner}</h2>
-          <div className={`
-            w-full flex-initial text-sm text-black/60
-            dark:text-white/60
-          `}
-          >
-            {site.description}
-          </div>
-        </div>
+    <div className="vcard-details">
+      <div className="position-relative d-inline-block mt-5 mt-md-n5" style={{ zIndex: 4 }}>
+        <Avatar
+          src={`https://github.com/${github.owner}.png`}
+          alt="Avatar"
+          size={296}
+          square={false}
+          className="width-full border color-bg-default"
+          style={{ height: "auto" }}
+        />
       </div>
-      {social && social.length > 0 && (
-        <ul className="flex list-none flex-col gap-2 text-sm">
-          {social.map(link => (
-            <li key={link.name}>
-              <a
-                href={link.url}
-                target="_blank"
-                className={`
-                  text-black/60
-                  hover:text-black
-                  dark:text-white/60 dark:hover:text-white
-                `}
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="vcard-names-container">
+        <h1 className="vcard-names py-3">
+          <span className="p-name vcard-fullname d-block overflow-hidden f3 text-bold">
+            {site.title}
+          </span>
+          <span className="p-nickname vcard-username d-block color-fg-muted f3 text-normal">
+            {github.owner}
+          </span>
+        </h1>
+      </div>
+      <div className="p-note user-profile-bio mb-3 color-fg-default f4">
+        {site.description}
+      </div>
+      <ul className="vcard-details list-style-none">
+        <li className="vcard-detail pt-1">
+          <a
+            href={`https://github.com/${github.owner}`}
+            target="_blank"
+            className="Link--secondary d-flex flex-items-center"
+          >
+            <MarkGithubIcon size={16} className="mr-2 color-fg-muted" />
+            <span className="color-fg-muted">
+              @
+              {github.owner}
+            </span>
+          </a>
+        </li>
+        {social && social.map(link => (
+          <li key={link.name} className="vcard-detail pt-1">
+            <a
+              href={link.url}
+              target="_blank"
+              className="Link--secondary d-flex flex-items-center"
+            >
+              <LinkIcon size={16} className="mr-2 color-fg-muted" />
+              <span className="color-fg-muted">{link.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 });
 
 const AuthorCard = () => {
   return (
-    <aside className="md:sticky md:top-16">
+    <div className="h-card">
       <Author />
-    </aside>
+    </div>
   );
 };
 

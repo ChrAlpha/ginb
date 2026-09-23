@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext, createContext, useCallback, memo, type ReactNode } from "react";
 import type { Theme, ThemeContextType } from "@/types";
-import { useMounted } from "@/lib/hooks/useMounted";
+import { BaseStyles, ThemeProvider } from "@primer/react";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -38,7 +38,6 @@ export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
     }
   });
 
-  // 添加事件监听器以响应系统颜色方案更改
   const handleColorSchemeChange = useCallback(
     (event?: MediaQueryListEvent | MediaQueryList) => {
       if (!event) {
@@ -59,7 +58,6 @@ export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", handleColorSchemeChange);
 
-    // 卸载组件时，移除事件监听器
     return () => {
       window
         .matchMedia("(prefers-color-scheme: dark)")
@@ -72,25 +70,18 @@ export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
       console.error("color must be system, light or dark");
     }
     else {
+      const resolvedColorMode = theme === "system" ? colorScheme : theme;
       if (theme == "system") {
         typeof window !== "undefined" && localStorage.removeItem("user-color-scheme");
-        if (colorScheme == "dark") {
-          document.documentElement.classList.add("dark");
-        }
-        else {
-          document.documentElement.classList.remove("dark");
-        }
       }
-      else if (theme == "dark") {
+      else {
         typeof window !== "undefined" && localStorage.setItem("user-color-scheme", theme);
-        document.documentElement.classList.add("dark");
       }
-      else if (theme == "light") {
-        typeof window !== "undefined" && localStorage.setItem("user-color-scheme", theme);
-        document.documentElement.classList.remove("dark");
-      }
+      document.documentElement.setAttribute("data-color-mode", resolvedColorMode || "light");
     }
   }, [theme, colorScheme]);
+
+  const primerColorMode = theme === "system" ? "auto" : theme;
 
   return (
     <>
@@ -98,237 +89,14 @@ export const ThemeProviders = memo(({ children }: ThemeProvidersProps) => {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html:
-            "!function(){const e=localStorage.getItem(\"user-color-scheme\");\"dark\"===e||!e&&window.window.matchMedia(\"(prefers-color-scheme: dark)\").matches?document.documentElement.classList.add(\"dark\"):document.documentElement.classList.remove(\"dark\");}()",
+            "!function(){const e=localStorage.getItem(\"user-color-scheme\");const mode=\"dark\"===e||(!e&&window.matchMedia(\"(prefers-color-scheme: dark)\").matches)?\"dark\":\"light\";document.documentElement.setAttribute(\"data-color-mode\",mode);}()",
         }}
       />
-      <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
-    </>
-  );
-});
-
-interface ToggleThemeProps {
-  responsive?: string;
-}
-
-export const ToggleTheme = memo(({ responsive }: ToggleThemeProps) => {
-  const mounted = useMounted();
-  const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  const handleClickOutside = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as Element;
-      if (target.closest("#toggle-theme-button") || target.closest("#toggle-theme-menu")) {
-        return;
-      }
-      else {
-        setIsToggleOpen(false);
-      }
-    },
-    [setIsToggleOpen],
-  );
-
-  useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [handleClickOutside]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return (
-    <>
-      <button
-        id="toggle-theme-button"
-        aria-label="Toggle Theme"
-        className={
-          "text-[#666] hover:text-black focus:outline-none dark:text-[#888] dark:hover:text-white"
-          + (responsive ? " " + responsive : "")
-        }
-        type="button"
-        onClick={() => setIsToggleOpen(!isToggleOpen)}
-      >
-        <svg
-          className="m-auto size-6"
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-          <path d="M12 3v18" />
-          <path d="M12 14l7 -7" />
-          <path d="M12 19l8.5 -8.5" />
-          <path d="M12 9l4.5 -4.5" />
-        </svg>
-      </button>
-      <div className={(isToggleOpen ? "absolute" : "hidden") + " right-0 top-12"}>
-        <div
-          id="toggle-theme-menu"
-          className={`
-            mt-1 box-content block min-w-min rounded-lg border bg-white p-2
-            dark:bg-black
-          `}
-        >
-          <button
-            id="toggle-theme-light-button"
-            aria-label="Always Light"
-            className={`
-              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
-              hover:bg-black/10
-              dark:text-white/60 dark:hover:bg-white/20
-            `}
-            onClick={() => setTheme("light")}
-          >
-            {theme == "light"
-              ? (
-                  <svg
-                    className="my-auto h-4 w-6 px-1"
-                    fill="none"
-                    height="24"
-                    shapeRendering="geometricPrecision"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width="24"
-                  >
-                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                  </svg>
-                )
-              : (
-                  <span className="w-6"></span>
-                )}
-            <svg
-              className="my-auto h-4 w-6 px-1"
-              data-testid="geist-icon"
-              fill="none"
-              height="24"
-              shapeRendering="geometricPrecision"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="24"
-            >
-              <circle cx="12" cy="12" r="5"></circle>
-              <path d="M12 1v2"></path>
-              <path d="M12 21v2"></path>
-              <path d="M4.22 4.22l1.42 1.42"></path>
-              <path d="M18.36 18.36l1.42 1.42"></path>
-              <path d="M1 12h2"></path>
-              <path d="M21 12h2"></path>
-              <path d="M4.22 19.78l1.42-1.42"></path>
-              <path d="M18.36 5.64l1.42-1.42"></path>
-            </svg>
-            <span className="break-keep">Light</span>
-          </button>
-          <button
-            id="toggle-theme-dark-button"
-            aria-label="Always Dark"
-            className={`
-              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
-              hover:bg-black/10
-              dark:text-white/60 dark:hover:bg-white/20
-            `}
-            onClick={() => setTheme("dark")}
-          >
-            {theme == "dark"
-              ? (
-                  <svg
-                    className="my-auto h-4 w-6 px-1"
-                    fill="none"
-                    height="24"
-                    shapeRendering="geometricPrecision"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width="24"
-                  >
-                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                  </svg>
-                )
-              : (
-                  <span className="w-6"></span>
-                )}
-            <svg
-              className="my-auto h-4 w-6 px-1"
-              data-testid="geist-icon"
-              fill="none"
-              height="24"
-              shapeRendering="geometricPrecision"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="24"
-            >
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-            </svg>
-            <span className="break-keep">Dark</span>
-          </button>
-          <button
-            id="toggle-theme-system-button"
-            aria-label="Follow System"
-            className={`
-              mx-auto flex w-full flex-row rounded-lg p-2 text-black/60
-              hover:bg-black/10
-              dark:text-white/60 dark:hover:bg-white/20
-            `}
-            onClick={() => setTheme("system")}
-          >
-            {theme != "light" && theme != "dark"
-              ? (
-                  <svg
-                    className="my-auto h-4 w-6 px-1"
-                    fill="none"
-                    height="24"
-                    shapeRendering="geometricPrecision"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width="24"
-                  >
-                    <path d="M 19.28125 5.28125 L 9 15.5625 L 4.71875 11.28125 L 3.28125 12.71875 L 8.28125 17.71875 L 9 18.40625 L 9.71875 17.71875 L 20.71875 6.71875 Z" />
-                  </svg>
-                )
-              : (
-                  <span className="w-6"></span>
-                )}
-            <svg
-              className="my-auto h-4 w-6 px-1"
-              data-testid="geist-icon"
-              fill="none"
-              height="24"
-              shapeRendering="geometricPrecision"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="24"
-            >
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <path d="M8 21h8"></path>
-              <path d="M12 17v4"></path>
-            </svg>
-            <span className="break-keep">System</span>
-          </button>
-        </div>
-      </div>
+      <ThemeProvider colorMode={primerColorMode || "auto"}>
+        <BaseStyles>
+          <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+        </BaseStyles>
+      </ThemeProvider>
     </>
   );
 });

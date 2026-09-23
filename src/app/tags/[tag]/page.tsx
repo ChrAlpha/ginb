@@ -42,24 +42,21 @@ export default async function TagPage({ params }: TagPageProps) {
 
   const postsWithSpecTag = await getPostsByTag(decodeURIComponent(tag));
   if (postsWithSpecTag.length === 0) {
-    // 404 Not Found
     return notFound();
   }
 
   return (
     <>
-      {" "}
-      <div className="w-full p-4">
-        <h1 className="text-3xl font-semibold">{decodeURIComponent(tag)}</h1>
-        <span className={`
-          text-black/60
-          dark:text-white/60
-        `}
-        >
+      <div className="Subhead">
+        <h1 className="Subhead-heading">
+          #
+          {decodeURIComponent(tag)}
+        </h1>
+        <div className="Subhead-description color-fg-muted">
           {postsWithSpecTag.length}
           {" "}
           posts in total
-        </span>
+        </div>
       </div>
       <ArchivesList posts={postsWithSpecTag} />
     </>
