@@ -2,6 +2,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import stylistic from "@stylistic/eslint-plugin";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import primerReact from "eslint-plugin-primer-react";
 
 const eslintConfig = defineConfig([
   stylistic.configs.customize({
@@ -11,6 +12,12 @@ const eslintConfig = defineConfig([
   }),
   ...nextVitals,
   ...nextTs,
+  {
+    plugins: {
+      "primer-react": primerReact,
+    },
+    rules: primerReact.configs.recommended.rules,
+  },
   {
     rules: {
       "react/display-name": "off",
