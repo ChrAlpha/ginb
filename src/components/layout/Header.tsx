@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { memo, useState, useEffect } from "react";
-import { site, github } from "/_config";
 import { useTheme } from "../ToggleTheme";
 import {
   HomeIcon,
@@ -16,7 +15,13 @@ import {
 } from "@primer/octicons-react";
 import { UnderlineNav, Avatar, IconButton, ActionMenu, ActionList } from "@primer/react";
 
-const Header = () => {
+// /_config reads server-only env vars, so the server layout passes these in
+interface HeaderProps {
+  title: string;
+  owner: string;
+}
+
+const Header = ({ title, owner }: HeaderProps) => {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [showCompactHeader, setShowCompactHeader] = useState(false);
@@ -56,7 +61,7 @@ const Header = () => {
           }}
         >
           <Avatar
-            src={`https://github.com/${github.owner}.png`}
+            src={`https://github.com/${owner}.png`}
             alt="Avatar"
             size={32}
           />
@@ -64,7 +69,7 @@ const Header = () => {
             href="/"
             className="f5 text-bold color-fg-default no-underline ml-2"
           >
-            {site.title}
+            {title}
           </Link>
         </div>
       </div>

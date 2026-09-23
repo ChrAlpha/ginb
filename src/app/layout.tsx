@@ -67,7 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body>
         <ThemeProviders>
           <MainLayout
-            header={<Header />}
+            header={<Header title={site.title} owner={github.owner} />}
             sidebar={<AuthorCard />}
             footer={<Footer />}
           >
